@@ -1,0 +1,241 @@
+{
+  "recipes" : [ {
+    "id" : 0,
+    "image" : "https://firebasestorage.googleapis.com/v0/b/recipes-cb2a2.appspot.com/o/IMG_20200301_142443.jpg?alt=media&token=19865359-80ad-42a8-82d7-8e08150a9a43",
+    "ingredients" : [ {
+      "amount" : "150 gr",
+      "name" : "Harina integral"
+    }, {
+      "amount" : "2",
+      "name" : "Huevos"
+    }, {
+      "amount" : "1 crdita",
+      "name" : "Bicarbonato"
+    }, {
+      "amount" : "1 crdita",
+      "name" : "Polvo de hornear"
+    }, {
+      "amount" : "7 sobres",
+      "name" : "Stevia"
+    }, {
+      "amount" : "3 crdas",
+      "name" : "Aceite de oliva"
+    }, {
+      "amount" : "2",
+      "name" : "Zanahorias ralladas finito"
+    }, {
+      "amount" : "A gusto un poco",
+      "name" : "Nueces picadas y/o pasas de uva"
+    }, {
+      "amount" : "A gusto un poco",
+      "name" : "Ralladura de naranja o banana pisada"
+    }, {
+      "amount" : "A gusto un poco",
+      "name" : "Canela"
+    } ],
+    "instructions" : [ {
+      "description" : "Para la torta",
+      "steps" : [ "Mezclar harina, polvo de hornear, bicarbonato, stevia, aceite, huevos en un bowl.", "Incorporarle zanahoria, cascara de naranja o banana y mezclar bien todos los ingredientes.", "Agrega nueces picadas y/o pasas.", "Poner en budinera o fuente aceitada y enharinada. Cocinar durante 40 mins con el horno al maximo." ]
+    } ],
+    "introduction" : "Receta de carrot cake, sin azucar y de harina integral. Ideal para los que no comen con azúcar.",
+    "name" : "Carrot Cake"
+  }, {
+    "id" : 1,
+    "image" : "https://firebasestorage.googleapis.com/v0/b/recipes-cb2a2.appspot.com/o/Cheesecake%20de%20frutos%20rojos.jpg?alt=media&token=959dc319-061a-4210-8724-54878c785870",
+    "ingredients" : [ {
+      "amount" : "800 gr",
+      "name" : "Queso crema"
+    }, {
+      "amount" : "400 gr",
+      "name" : "Crema"
+    }, {
+      "amount" : "150 gr",
+      "name" : "Manteca"
+    }, {
+      "amount" : "225 gr",
+      "name" : "Azúcar"
+    }, {
+      "amount" : "100 ml",
+      "name" : "Leche"
+    }, {
+      "amount" : "125 gr",
+      "name" : "Frutos rojos"
+    }, {
+      "amount" : "1 crdita",
+      "name" : "Esencia de vainilla"
+    }, {
+      "amount" : "Un toque",
+      "name" : "Jugo de limon"
+    }, {
+      "amount" : "350 gr",
+      "name" : "Galletitas"
+    } ],
+    "instructions" : [ {
+      "description" : "Para la base",
+      "steps" : [ "Triturar todas las galletitas hasta hacerlas polvo y reservar en un bowl. Se puede utilizar una procesadora para agilizar el proceso.", "Derretir la manteca y verterla lentamente sobre el polvo de galletas. Unir revolviendo con un tenedor hasta humedecer todo el contenido.", "Colocar la mezcla obtenida en el molde y alisar formando una base sobre el mismo. Llevar a la heladera, mientras continuamos con la crema." ]
+    }, {
+      "description" : "Para la crema",
+      "steps" : [ "En un recipiente grande, echar el queso crema, el azúcar impalpable y la leche.", "Revolver hasta conseguir una mezcla homogénea.", "Agregar aquí la esencia de vainilla.", "En otro recipiente separado, agregar la crema de leche y batir con batidora eléctrica hasta montar.", "Incorporar la crema batida a la mezcla anterior y revolver hasta unir.", "Agregar el jugo de limón a gusto.", "Verter la mezcla conseguida en el molde sobre la base de galletitas. Alisar para que no quede desparejo. Llevar al freezer durante 30 minutos, mientras continuamos con el coulis." ]
+    }, {
+      "description" : "Para el coulis",
+      "steps" : [ "Procesar los frutos rojos junto con 25 gr de azúcar hasta obtener la consistencia deseada.", "Retirar el molde del freezer y verter la mezcla obtenida sobre la crema de queso, y cubrir la totalidad de la torta.", "Llevar a la heladera por al menos 6 horas. Servir bien frío." ]
+    } ],
+    "introduction" : "Esta receta es muy sencilla, no lleva cocción. Se necesitaran galletas sabor vainilla de la marca que usted desee, y frutos rojos varios también a elección, se recomiendan frutillas y arándanos. Para la crema de queso se recomienda utilizar queso de tipo Philadelphia o queso crema Finlandia clásico. Para las cantidades indicadas se utilizó un molde de 22 cm de diámetro.",
+    "name" : "Cheesecake de frutos rojos"
+  }, {
+    "id" : 2,
+    "image" : "https://firebasestorage.googleapis.com/v0/b/recipes-cb2a2.appspot.com/o/Brownie%20con%20crema.jpg?alt=media&token=7143f846-8c0c-4b1d-bc5d-6ac49082b0e2",
+    "ingredients" : [ {
+      "amount" : "400 gr",
+      "name" : "Chocolate negro"
+    }, {
+      "amount" : "Un poco",
+      "name" : "Manteca"
+    }, {
+      "amount" : "300 gr",
+      "name" : "Azúcar impalpable"
+    }, {
+      "amount" : "150 gr",
+      "name" : "Harina"
+    }, {
+      "amount" : "400 ml",
+      "name" : "Crema de leche"
+    }, {
+      "amount" : "150 gr",
+      "name" : "Nueces"
+    }, {
+      "amount" : "6",
+      "name" : "Huevos"
+    }, {
+      "amount" : "2 cdas",
+      "name" : "Esencia de vainilla"
+    }, {
+      "amount" : "2 cdas",
+      "name" : "Levadura seca"
+    } ],
+    "instructions" : [ {
+      "description" : "Para el brownie",
+      "steps" : [ "Untar una bandeja o fuente con un poco manteca.", "Poner el chocolate en trozos dentro de un recipiente y derretir a baño María.", "Incorporar al chocolate derretido, 200 gr de azúcar y los huevos, y revolver con un batidor de alambre hasta que se forma una crema espumosa.", "Luego añadir las nueces picadas y el extracto de vainilla. Mezclar nuevamente con movimientos envolventes.", "Tamizar la harina con un colador y agregarla a la preparación anterior, como también la levadura seca. Revolver muy bien hasta conseguir una pasta homogónea.", "Verter la preparación en la bandeja, con un molde si es necesario, y estirar con espátula para alisar.", "Hornear durante 35-40 minutos a horno precalentado a temperatura moderada (170-180°C) o hasta que al pinchar con un tenedor o escarbadientes, este salga seco.", "Al transcurrir 20 minutos de cocción, retirar la bandeja y cubrir con papel aluminio para que no se queme la superficie.", "Remover del horno y dejar enfriar." ]
+    }, {
+      "description" : "Para la crema",
+      "steps" : [ "En un recipiente, agregar la crema de leche con 100 gr de azúcar y revolver hasta disolver.", "Batir con batidora eléctrica hasta montar.", "Decorar a gusto la superficie del brownie con la crema. Se puede usar una manga para mayor detalle o simplemente una espátula para cubrir." ]
+    }, {
+      "description" : "Para el decorado",
+      "steps" : [ "Derretir 50 gr de chocolate negro.", "Decorar dejando caer el chocolate en forma de hilo, con una cuchara." ]
+    } ],
+    "introduction" : "Receta para el clásico brownie con nueces, con un decorado de crema encima. Las cantidades indicadas corresponden a un molde de 22 cm de diámetro, formando un brownie mas \"alto\" que de costumbre. Si desea obtener una torta más baja, reduzca las cantidades a la mitad.",
+    "name" : "Brownie con crema"
+  }, {
+    "id" : 3,
+    "image" : "https://firebasestorage.googleapis.com/v0/b/recipes-cb2a2.appspot.com/o/arroz.jpg?alt=media&token=00a13f28-82dc-45da-ab52-92a6d0f4964e",
+    "ingredients" : [ {
+      "amount" : "1/2 taza",
+      "name" : "Arroz"
+    }, {
+      "amount" : "2/3 taza",
+      "name" : "Azúcar"
+    }, {
+      "amount" : "4 tazas",
+      "name" : "Leche"
+    }, {
+      "amount" : "3",
+      "name" : "Yemas"
+    }, {
+      "amount" : "1 cucharada",
+      "name" : "Esencia de vainilla"
+    } ],
+    "instructions" : [ {
+      "description" : "Para el arroz",
+      "steps" : [ "En una cacerola agregar el arroz, la leche y la mitad del azúcar. Cocinar hasta que está tierno.", "En otro recipiente, batir las yemas con el resto del azúcar y la esencia de vainilla.", "Incorporar las yemas lentamente al arroz y cocinar 2 minutos más, revolviendo continuamente. Opcionalmente se le puede agregar cáscara de naranja o limón.", "Colocar en una fuente y espolvorear con canela. Dejar enfriar en la heladera por varias horas." ]
+    } ],
+    "introduction" : "Esta receta es similar a la tradicional del arroz con leche, con el agregado de yemas de huevo durante la cocción del arroz, para darle una consistencia mas espesa al postre. Se pueden obviar las yemas si se desea un postre mas bien líquido.",
+    "name" : "Arroz con leche"
+  }, {
+    "id" : 4,
+    "image" : "https://firebasestorage.googleapis.com/v0/b/recipes-cb2a2.appspot.com/o/IMG-20180512-WA0013.jpg?alt=media&token=0c721c44-fe1e-4287-881a-5c2f98de0ad9",
+    "ingredients" : [ {
+      "amount" : "400 gr",
+      "name" : "Harina"
+    }, {
+      "amount" : "200 gr",
+      "name" : "Azúcar"
+    }, {
+      "amount" : "125 gr",
+      "name" : "Manteca"
+    }, {
+      "amount" : "1",
+      "name" : "Huevo"
+    }, {
+      "amount" : "1 cucharadita",
+      "name" : "Esencia de vainilla"
+    }, {
+      "amount" : "Un poco",
+      "name" : "Leche"
+    }, {
+      "amount" : "Un poco",
+      "name" : "Polvo Royal"
+    } ],
+    "instructions" : [ {
+      "description" : "Para las galletas",
+      "steps" : [ "Precalentar el horno a 180°", "En un bowl, mezclar el harina con la manteca cortada en pequeños trozos.", "Una vez que estén bien integrados, incorporar el azúcar, el huevo, la esencia de vainilla y el poco de leche.", "Deberás mezclar hasta formar una masa y luego amasar con las manos hasta que ésta se torne compacta y no se quede pegada en tus dedos.", "Espolvorear un poco de harina sobre la mesada, colocar la masa y estilarla con la ayuda de un palo de amasar hasta que tenga un grosor aproximado de 1 centímetro.", "Cortar con un molde para galletitas, o un vaso en su defecto.", "Colocar las galletitas en una bandeja y llevar al horno durante 8-10 minutos.", "Dejar enfriar y servir." ]
+    } ],
+    "introduction" : "Receta para hacer galletitas de vainilla. Se pueden hacer de distintos sabores, como naranja, limón o chocolate, agregando ralladuras o cacao.",
+    "name" : "Galletas de vainilla"
+  }, {
+    "id" : 5,
+    "image" : "https://firebasestorage.googleapis.com/v0/b/recipes-cb2a2.appspot.com/o/brownie%20con%20oreo.jpeg?alt=media&token=fe353f95-03e2-4ea1-a4b5-4e4e8f8980a2",
+    "ingredients" : [ {
+      "amount" : "100 gr",
+      "name" : "Manteca"
+    }, {
+      "amount" : "180 gr",
+      "name" : "Chocolate"
+    }, {
+      "amount" : "3",
+      "name" : "Huevos"
+    }, {
+      "amount" : "300 gr",
+      "name" : "Azúcar"
+    }, {
+      "amount" : "160 gr",
+      "name" : "Harina"
+    }, {
+      "amount" : "Un paquete",
+      "name" : "Galletitas Oreo"
+    } ],
+    "instructions" : [ {
+      "description" : "Para el brownie",
+      "steps" : [ "Calentar la manteca con el chocolate y reservar.", "Batir los huevos con el azúcar hasta que quede blanco.", "Luego añadir el chocolate de a poco y luego la harina.", "Colocar en un molde y ponerle las galletitas encima.", "Cocinar 20 minutos." ]
+    } ],
+    "introduction" : "Receta para hacer un brownie con oreos.",
+    "name" : "Brownie Oreo"
+  }, {
+    "id" : 6,
+    "image" : "https://firebasestorage.googleapis.com/v0/b/recipes-cb2a2.appspot.com/o/Budin%20de%20banana.jpeg?alt=media&token=9a977f9e-1711-4a92-b370-d2480acaf76a",
+    "ingredients" : [ {
+      "amount" : "2",
+      "name" : "Bananas"
+    }, {
+      "amount" : "1 taza",
+      "name" : "Azucar"
+    }, {
+      "amount" : "1/4 taza",
+      "name" : "Agua"
+    }, {
+      "amount" : "1/4 taza",
+      "name" : "Aceite"
+    }, {
+      "amount" : "2 cucharadas",
+      "name" : "Polvo de hornear"
+    }, {
+      "amount" : "1 taza y media",
+      "name" : "Harina"
+    } ],
+    "instructions" : [ {
+      "description" : "Para el budín",
+      "steps" : [ "Pisar 2 bananas.", "Agregar la taza de azúcar, el aceite, el agua y el polvo de hornear y mezclar.", "Luego añadir la harina.", "Aceitar o enmantecar la budinera y agregar la mezcla.", "Espolvorear un poco de azúcar por encima", "Hornear por 40 minutos.", "Dejar enfriar y servir." ]
+    } ],
+    "introduction" : "Receta para hacer un budín, en este caso con sabor a banana.",
+    "name" : "Budín de banana"
+  } ]
+}
