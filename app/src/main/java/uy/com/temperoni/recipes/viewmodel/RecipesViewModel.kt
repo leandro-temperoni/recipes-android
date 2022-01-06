@@ -11,27 +11,31 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import uy.com.temperoni.recipes.dto.Recipe
 import uy.com.temperoni.recipes.repository.RecipesRepository
+import uy.com.temperoni.recipes.ui.state.UiState
 
 class RecipesViewModel : ViewModel() {
 
     private val repository = RecipesRepository()
 
-    private var recipes: MutableLiveData<List<Recipe>>? = null
+    private var recipesBookState: MutableLiveData<UiState>? = null
 
-    fun getRecipes(resources: Resources): LiveData<List<Recipe>> {
-        if (recipes == null) {
+    fun getRecipes(resources: Resources): LiveData<UiState> {
+        if (recipesBookState == null) {
             loadRecipes(resources)
-            recipes = MutableLiveData<List<Recipe>>()
+            recipesBookState = MutableLiveData()
         }
-        return recipes!!
+        return recipesBookState!!
     }
 
     private fun loadRecipes(resources: Resources) {
         viewModelScope.launch(Dispatchers.IO) {
-            delay(2000)
+            delay(3000)
             val response = repository.fetchRecipes(resources)
             withContext(Dispatchers.Main) {
-                recipes!!.value = response
+                recipesBookState!!.value = UiState().apply {
+                    items = response
+                    state = UiState.ScreenState.LIST
+                }
             }
         }
     }
