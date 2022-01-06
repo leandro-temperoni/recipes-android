@@ -23,6 +23,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
+import coil.transform.CircleCropTransformation
 import uy.com.temperoni.recipes.dto.Recipe
 import uy.com.temperoni.recipes.ui.state.UiState
 import uy.com.temperoni.recipes.ui.state.UiState.*
@@ -75,8 +77,17 @@ fun RecipeRow(recipe: Recipe) {
     Surface(elevation = 4.dp, modifier = Modifier
         .height(200.dp)
         .padding(0.dp, 4.dp), shape = Shapes.medium) {
-        Image(bitmap = ImageBitmap.imageResource(id = R.mipmap.foto), contentDescription = null, contentScale = ContentScale.Crop, modifier = Modifier
-            .fillMaxWidth(1f))
+        Image(
+            painter = rememberImagePainter(
+                data = recipe.image,
+                builder = {
+                    crossfade(true)
+                }
+            ),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxWidth(1f)
+        )
         Box(modifier = Modifier.fillMaxWidth(1f), contentAlignment = Alignment.BottomStart) {
             Text(color = MaterialTheme.colors.background, text = recipe.name!!, modifier = Modifier.padding(8.dp))
         }

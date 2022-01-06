@@ -68,8 +68,8 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     // Networking
-    implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 
     // Test
