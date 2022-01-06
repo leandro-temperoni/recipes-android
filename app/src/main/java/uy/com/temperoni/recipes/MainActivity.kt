@@ -14,6 +14,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -53,11 +54,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun RecipesBook(viewModel: RecipesViewModel, resources: Resources) {
-    val recipesBook: UiState by viewModel.getRecipes(resources).observeAsState(UiState())
+    val recipesBook: UiState by viewModel.getRecipes(resources).collectAsState()
 
     when (recipesBook.state) {
         LOADING -> {
-            Box(modifier = Modifier.fillMaxWidth(1f).fillMaxHeight(1f), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier
+                .fillMaxWidth(1f)
+                .fillMaxHeight(1f), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
         }
@@ -98,7 +101,9 @@ fun RecipeRow(recipe: Recipe) {
 @Composable
 fun DefaultPreview() {
     RecetasTheme {
-        Box(modifier = Modifier.fillMaxWidth(1f).fillMaxHeight(1f), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier
+            .fillMaxWidth(1f)
+            .fillMaxHeight(1f), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     }
