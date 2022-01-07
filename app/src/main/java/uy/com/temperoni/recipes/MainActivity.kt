@@ -1,6 +1,6 @@
 package uy.com.temperoni.recipes
 
-import android.content.res.Resources
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,22 +16,17 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import coil.transform.CircleCropTransformation
 import dagger.hilt.android.AndroidEntryPoint
 import uy.com.temperoni.recipes.dto.Recipe
-import uy.com.temperoni.recipes.ui.state.UiState
-import uy.com.temperoni.recipes.ui.state.UiState.*
-import uy.com.temperoni.recipes.ui.state.UiState.ScreenState.LIST
-import uy.com.temperoni.recipes.ui.state.UiState.ScreenState.LOADING
+import uy.com.temperoni.recipes.ui.state.RecipesUiState
+import uy.com.temperoni.recipes.ui.state.ScreenState.LIST
+import uy.com.temperoni.recipes.ui.state.ScreenState.LOADING
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.ui.theme.Shapes
 import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
@@ -51,12 +46,14 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        startActivity(Intent(this, DetailActivity::class.java))
     }
 }
 
 @Composable
 fun RecipesBook(viewModel: RecipesViewModel) {
-    val recipesBook: UiState by viewModel.getRecipes().collectAsState()
+    val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
     when (recipesBook.state) {
         LOADING -> {

@@ -16,4 +16,10 @@ class RecipesRepository @Inject constructor(private val resources: Resources) {
         val data = Decoder().decodeJson(resources)!!
         emit(data)
     }.flowOn(Dispatchers.IO)
+
+    fun fetchRecipe(id: Int): Flow<Recipe> = flow {
+        delay(3000)
+        val data = Decoder().decodeJson(resources)?.get(id)!!
+        emit(data)
+    }.flowOn(Dispatchers.IO)
 }
