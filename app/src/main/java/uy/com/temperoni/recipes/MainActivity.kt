@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
+import dagger.hilt.android.AndroidEntryPoint
 import uy.com.temperoni.recipes.dto.Recipe
 import uy.com.temperoni.recipes.ui.state.UiState
 import uy.com.temperoni.recipes.ui.state.UiState.*
@@ -35,6 +36,7 @@ import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.ui.theme.Shapes
 import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +47,7 @@ class MainActivity : ComponentActivity() {
             RecetasTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    RecipesBook(viewModel, resources)
+                    RecipesBook(viewModel)
                 }
             }
         }
@@ -53,8 +55,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun RecipesBook(viewModel: RecipesViewModel, resources: Resources) {
-    val recipesBook: UiState by viewModel.getRecipes(resources).collectAsState()
+fun RecipesBook(viewModel: RecipesViewModel) {
+    val recipesBook: UiState by viewModel.getRecipes().collectAsState()
 
     when (recipesBook.state) {
         LOADING -> {
