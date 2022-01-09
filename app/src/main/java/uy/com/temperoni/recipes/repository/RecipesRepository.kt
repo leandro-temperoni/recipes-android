@@ -11,12 +11,12 @@ import javax.inject.Inject
 class RecipesRepository @Inject constructor(private val api: RecipesApi) {
 
     fun fetchRecipes(): Flow<List<Recipe>> = flow {
-        val data = api.get("https://tempe-recipes-api.herokuapp.com/recipes")
+        val data = api.getRecipesList("https://tempe-recipes-api.herokuapp.com/recipes")
         emit(data)
     }.flowOn(Dispatchers.IO)
 
     fun fetchRecipe(id: Int): Flow<Recipe> = flow {
-        val data = api.get("https://tempe-recipes-api.herokuapp.com/recipes")[id]
+        val data = api.getRecipeDetail("https://tempe-recipes-api.herokuapp.com/recipes/$id")
         emit(data)
     }.flowOn(Dispatchers.IO)
 }

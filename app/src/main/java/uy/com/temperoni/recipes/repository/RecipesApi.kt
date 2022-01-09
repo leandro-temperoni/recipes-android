@@ -2,19 +2,26 @@ package uy.com.temperoni.recipes.repository
 
 import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken;
 import uy.com.temperoni.recipes.dto.Recipe
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.lang.reflect.Type
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.inject.Inject
 
 class RecipesApi @Inject constructor(private val gson: Gson) {
 
-    fun get(url: String): List<Recipe> {
-        return gson.fromJson(getJson(url), RecipeList::class.java).recipes!!
+    fun getRecipesList(url: String): List<Recipe> {
+        val userListType: Type = object : TypeToken<ArrayList<Recipe?>?>() {}.getType()
+        return gson.fromJson(getJson(url), userListType)
+    }
+
+    fun getRecipeDetail(url: String): Recipe {
+        return gson.fromJson(getJson(url), Recipe::class.java)
     }
 
     private fun getJson(urlString: String): String {
@@ -51,9 +58,5 @@ class RecipesApi @Inject constructor(private val gson: Gson) {
                 e.printStackTrace()
             }
         }
-    }
-
-    inner class RecipeList {
-        val recipes: List<Recipe>? = null
     }
 }
