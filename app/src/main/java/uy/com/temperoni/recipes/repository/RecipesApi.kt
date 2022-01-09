@@ -15,13 +15,17 @@ import javax.inject.Inject
 
 class RecipesApi @Inject constructor(private val gson: Gson) {
 
-    fun getRecipesList(url: String): List<Recipe> {
-        val userListType: Type = object : TypeToken<ArrayList<Recipe?>?>() {}.getType()
-        return gson.fromJson(getJson(url), userListType)
+    companion object {
+        const val API_URL = "https://tempe-recipes-api.herokuapp.com/recipes"
     }
 
-    fun getRecipeDetail(url: String): Recipe {
-        return gson.fromJson(getJson(url), Recipe::class.java)
+    fun getRecipesList(): List<Recipe> {
+        val userListType: Type = object : TypeToken<ArrayList<Recipe?>?>() {}.getType()
+        return gson.fromJson(getJson(API_URL), userListType)
+    }
+
+    fun getRecipeDetail(id: Int): Recipe {
+        return gson.fromJson(getJson("$API_URL/$id"), Recipe::class.java)
     }
 
     private fun getJson(urlString: String): String {

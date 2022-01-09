@@ -9,6 +9,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -24,5 +26,10 @@ class RecipesModule {
     @Provides
     fun providesGson(): Gson {
         return Gson()
+    }
+
+    @Provides
+    fun providesDispatcher(): CoroutineDispatcher {
+        return Dispatchers.Main
     }
 }
