@@ -1,24 +1,25 @@
 package uy.com.temperoni.recipes
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
@@ -42,13 +43,28 @@ class MainActivity : ComponentActivity() {
             RecetasTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    RecipesBook(viewModel)
+                    val scaffoldState = rememberScaffoldState()
+                    val scope = rememberCoroutineScope()
+                    Scaffold(
+                        scaffoldState = scaffoldState,
+                        topBar = {
+                            TopAppBar(
+                                title = { Text("Recetario") }
+                            )
+                        },
+                        content = {
+                            RecipesBook(viewModel)
+                        }
+                    )
                 }
             }
         }
-
-        startActivity(Intent(this, DetailActivity::class.java))
     }
+}
+
+// TODO use navigation
+fun goToDetail(context: Context, id: Int) {
+    context.startActivity(Intent(context, DetailActivity::class.java).putExtra("id", id))
 }
 
 @Composable
@@ -57,9 +73,11 @@ fun RecipesBook(viewModel: RecipesViewModel) {
 
     when (recipesBook.state) {
         LOADING -> {
-            Box(modifier = Modifier
-                .fillMaxWidth(1f)
-                .fillMaxHeight(1f), contentAlignment = Alignment.Center) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(1f)
+                    .fillMaxHeight(1f), contentAlignment = Alignment.Center
+            ) {
                 CircularProgressIndicator()
             }
         }
@@ -76,9 +94,12 @@ fun RecipesBook(viewModel: RecipesViewModel) {
 
 @Composable
 fun RecipeRow(recipe: Recipe) {
+    val context = LocalContext.current
     Surface(elevation = 4.dp, modifier = Modifier
         .height(200.dp)
-        .padding(0.dp, 4.dp), shape = Shapes.medium) {
+        .padding(0.dp, 4.dp)
+        .clickable { goToDetail(context, recipe.id!!) }, shape = Shapes.medium
+    ) {
         Image(
             painter = rememberImagePainter(
                 data = recipe.image,
@@ -91,7 +112,11 @@ fun RecipeRow(recipe: Recipe) {
             modifier = Modifier.fillMaxWidth(1f)
         )
         Box(modifier = Modifier.fillMaxWidth(1f), contentAlignment = Alignment.BottomStart) {
-            Text(color = MaterialTheme.colors.background, text = recipe.name!!, modifier = Modifier.padding(8.dp))
+            Text(
+                color = MaterialTheme.colors.background,
+                text = recipe.name!!,
+                modifier = Modifier.padding(8.dp)
+            )
         }
     }
 }
@@ -100,9 +125,11 @@ fun RecipeRow(recipe: Recipe) {
 @Composable
 fun DefaultPreview() {
     RecetasTheme {
-        Box(modifier = Modifier
-            .fillMaxWidth(1f)
-            .fillMaxHeight(1f), contentAlignment = Alignment.Center) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(1f)
+                .fillMaxHeight(1f), contentAlignment = Alignment.Center
+        ) {
             CircularProgressIndicator()
         }
     }

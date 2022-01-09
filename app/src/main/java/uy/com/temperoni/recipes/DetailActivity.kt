@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.CircleShape
@@ -15,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -51,7 +51,30 @@ class DetailActivity : ComponentActivity() {
             RecetasTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting(viewModel)
+                    Surface(color = MaterialTheme.colors.background) {
+                        val scaffoldState = rememberScaffoldState()
+                        val scope = rememberCoroutineScope()
+                        Scaffold(
+                            scaffoldState = scaffoldState,
+                            topBar = {
+                                TopAppBar(
+                                    title = {},
+                                    navigationIcon = {
+                                        IconButton(
+                                            onClick = {
+                                                finish()
+                                            }
+                                        ) {
+                                            Icon(Icons.Filled.ArrowBack, contentDescription = "Localized description")
+                                        }
+                                    }
+                                )
+                            },
+                            content = { innerPadding ->
+                                Content(intent.getIntExtra("id", -1), viewModel)
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -59,8 +82,8 @@ class DetailActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(viewModel: RecipeDetailViewModel) {
-    val recipe: RecipeDetailUiState by viewModel.getRecipe(2).collectAsState()
+fun Content(id: Int, viewModel: RecipeDetailViewModel) {
+    val recipe: RecipeDetailUiState by viewModel.getRecipe(id).collectAsState()
 
     when (recipe.state) {
         ScreenState.LOADING -> {
@@ -148,7 +171,7 @@ fun Ingredient(data: Ingredient) {
         Text(
             color = Color.Black,
             text = "${data.name}",
-            modifier = Modifier.weight(.75f),
+            modifier = Modifier.weight(.6f),
             fontSize = 16.sp,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
@@ -156,10 +179,12 @@ fun Ingredient(data: Ingredient) {
         Text(
             color = MaterialTheme.colors.primary,
             text = "${data.amount}",
-            modifier = Modifier.weight(.25f),
+            modifier = Modifier.weight(.4f),
             textAlign = TextAlign.End,
             fontSize = 16.sp,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Medium,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
@@ -168,7 +193,7 @@ fun Ingredient(data: Ingredient) {
 fun Step(text: String, index: Int) {
     Row(modifier = Modifier
         .fillMaxWidth(1f)
-        .padding(0.dp, 12.dp), verticalAlignment = Alignment.Top) {
+        .padding(12.dp), verticalAlignment = Alignment.Top) {
         Box(
             modifier = Modifier
                 .width(32.dp)

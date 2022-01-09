@@ -1,25 +1,22 @@
 package uy.com.temperoni.recipes.repository
 
-import android.content.res.Resources
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import uy.com.temperoni.recipes.dto.Recipe
+import uy.com.temperoni.recipes.repository.RecipesApi.RecipeList
 import javax.inject.Inject
 
-class RecipesRepository @Inject constructor(private val resources: Resources) {
+class RecipesRepository @Inject constructor(private val api: RecipesApi) {
 
     fun fetchRecipes(): Flow<List<Recipe>> = flow {
-        delay(3000)
-        val data = Decoder().decodeJson(resources)!!
+        val data = api.get("https://tempe-recipes-api.herokuapp.com/recipes")
         emit(data)
     }.flowOn(Dispatchers.IO)
 
     fun fetchRecipe(id: Int): Flow<Recipe> = flow {
-        delay(3000)
-        val data = Decoder().decodeJson(resources)?.get(id)!!
+        val data = api.get("https://tempe-recipes-api.herokuapp.com/recipes")[id]
         emit(data)
     }.flowOn(Dispatchers.IO)
 }
