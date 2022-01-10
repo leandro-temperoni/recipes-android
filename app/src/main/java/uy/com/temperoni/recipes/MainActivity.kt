@@ -96,7 +96,7 @@ fun RecipesBook(viewModel: RecipesViewModel) {
 @Composable
 fun RecipeRow(recipe: Recipe) {
     val context = LocalContext.current
-    Surface(elevation = 4.dp, modifier = Modifier
+    Card(elevation = 8.dp, modifier = Modifier
         .height(200.dp)
         .padding(0.dp, 4.dp)
         .clickable { goToDetail(context, recipe.id!!, recipe.name!!) }, shape = Shapes.medium
