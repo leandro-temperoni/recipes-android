@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -56,11 +57,15 @@ class DetailActivity : AppCompatActivity() {
             RecetasTheme {
 
                 val toolbarHeight = 56.dp
-                val toolbarHeightPx = with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() }
+                val toolbarHeightPx =
+                    with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() }
                 val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
                 val nestedScrollConnection = remember {
                     object : NestedScrollConnection {
-                        override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                        override fun onPreScroll(
+                            available: Offset,
+                            source: NestedScrollSource
+                        ): Offset {
                             val delta = available.y
                             val newOffset = toolbarOffsetHeightPx.value + delta
                             toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
@@ -86,12 +91,20 @@ class DetailActivity : AppCompatActivity() {
                                         finish()
                                     }
                                 ) {
-                                    Icon(Icons.Filled.ArrowBack, contentDescription = "Localized description")
+                                    Icon(
+                                        Icons.Filled.ArrowBack,
+                                        contentDescription = "Localized description"
+                                    )
                                 }
                             },
                             modifier = Modifier
                                 .height(toolbarHeight)
-                                .offset { IntOffset(x = 0, y = toolbarOffsetHeightPx.value.roundToInt()) }
+                                .offset {
+                                    IntOffset(
+                                        x = 0,
+                                        y = toolbarOffsetHeightPx.value.roundToInt()
+                                    )
+                                }
                         )
                     }
                 }
@@ -186,9 +199,11 @@ fun SubTitle(text: String) {
 
 @Composable
 fun Ingredient(data: Ingredient) {
-    Row(modifier = Modifier
-        .fillMaxWidth(1f)
-        .padding(12.dp), verticalAlignment = Alignment.Top) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .padding(12.dp), verticalAlignment = Alignment.Top
+    ) {
         Text(
             color = MaterialTheme.colors.onSurface,
             text = "${data.name}",
@@ -212,9 +227,11 @@ fun Ingredient(data: Ingredient) {
 
 @Composable
 fun Step(text: String, index: Int) {
-    Row(modifier = Modifier
-        .fillMaxWidth(1f)
-        .padding(12.dp), verticalAlignment = Alignment.Top) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .padding(12.dp), verticalAlignment = Alignment.Top
+    ) {
         Box(
             modifier = Modifier
                 .width(32.dp)
@@ -263,13 +280,25 @@ fun Tabs(recipe: Recipe) {
     var state by remember { mutableStateOf(0) }
     TabRow(selectedTabIndex = state) {
         Tab(
-            icon = { Icon(imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_kitchen_24), contentDescription = "") },
+            icon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_kitchen_24),
+                    tint = Color.White,
+                    contentDescription = ""
+                )
+            },
             text = { Text("INGREDIENTES") },
             selected = state == 0,
             onClick = { state = 0 }
         )
         Tab(
-            icon = { Icon(imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_format_list_numbered_24), contentDescription = "") },
+            icon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_format_list_numbered_24),
+                    tint = Color.White,
+                    contentDescription = ""
+                )
+            },
             text = { Text("PASOS") },
             selected = state == 1,
             onClick = { state = 1 }
@@ -288,13 +317,23 @@ fun Tabs(recipe: Recipe) {
 fun DefaultPreview2() {
     RecetasTheme {
         Column {
-            Ingredient(Ingredient("300 gr",  "Harina"))
+            Ingredient(Ingredient("300 gr", "Harina"))
             Ingredient(Ingredient("3", "Huevos"))
-            Ingredient(Ingredient("150",  "Azucar impalpable"))
-            Ingredient(Ingredient("2 cdtas",  "Polvo de hornear"))
-            Ingredient(Ingredient("1 pizca",  "Sal"))
-            Ingredient(Ingredient("1 pizca",  "Algo largo largoAlgo largo largoAlgo largo largoAlgo largo largo"))
-            Ingredient(Ingredient("1 pizca",  "largo largoAlgo largo largoAlgo largo largoAlgo largo largoAlgo largo largoAlgo largo largoAlgo largo largoAlgo largo largo"))
+            Ingredient(Ingredient("150", "Azucar impalpable"))
+            Ingredient(Ingredient("2 cdtas", "Polvo de hornear"))
+            Ingredient(Ingredient("1 pizca", "Sal"))
+            Ingredient(
+                Ingredient(
+                    "1 pizca",
+                    "Algo largo largoAlgo largo largoAlgo largo largoAlgo largo largo"
+                )
+            )
+            Ingredient(
+                Ingredient(
+                    "1 pizca",
+                    "largo largoAlgo largo largoAlgo largo largoAlgo largo largoAlgo largo largoAlgo largo largoAlgo largo largoAlgo largo largo"
+                )
+            )
         }
     }
 }
