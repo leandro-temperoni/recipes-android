@@ -1,7 +1,6 @@
 package uy.com.temperoni.recipes
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,30 +8,30 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
@@ -44,10 +43,6 @@ import uy.com.temperoni.recipes.ui.state.RecipeDetailUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipeDetailViewModel
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.IntOffset
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -128,6 +123,7 @@ fun Content(id: Int, viewModel: RecipeDetailViewModel) {
     }
 }
 
+// TODO separate composables in different files
 @Composable
 fun Detail(recipe: Recipe) {
     Column(
@@ -156,7 +152,7 @@ fun Detail(recipe: Recipe) {
         ) {
             Column {
                 Text(
-                    color = Color.Black,
+                    color = MaterialTheme.colors.onSurface,
                     text = recipe.name!!,
                     modifier = Modifier.padding(8.dp),
                     fontSize = 32.sp
@@ -165,7 +161,7 @@ fun Detail(recipe: Recipe) {
                 SubTitle("DESCRIPCION")
 
                 Text(
-                    color = Color.Black,
+                    color = MaterialTheme.colors.onSurface,
                     text = recipe.introduction!!,
                     modifier = Modifier.padding(8.dp),
                     fontSize = 16.sp
@@ -194,7 +190,7 @@ fun Ingredient(data: Ingredient) {
         .fillMaxWidth(1f)
         .padding(12.dp), verticalAlignment = Alignment.Top) {
         Text(
-            color = Color.Black,
+            color = MaterialTheme.colors.onSurface,
             text = "${data.name}",
             modifier = Modifier.weight(.6f),
             fontSize = 16.sp,
@@ -235,7 +231,7 @@ fun Step(text: String, index: Int) {
             )
         }
         Text(
-            color = Color.Black,
+            color = MaterialTheme.colors.onSurface,
             text = text,
             modifier = Modifier.padding(12.dp, 0.dp, 0.dp, 0.dp),
             fontSize = 16.sp,

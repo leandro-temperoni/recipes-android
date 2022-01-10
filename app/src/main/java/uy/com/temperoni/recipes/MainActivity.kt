@@ -114,7 +114,7 @@ fun RecipeRow(recipe: Recipe) {
         )
         Box(modifier = Modifier.fillMaxWidth(1f), contentAlignment = Alignment.BottomStart) {
             Text(
-                color = MaterialTheme.colors.background,
+                color = MaterialTheme.colors.onSurface,
                 text = recipe.name!!,
                 modifier = Modifier.padding(8.dp)
             )
