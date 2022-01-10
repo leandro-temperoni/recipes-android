@@ -21,8 +21,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
@@ -42,7 +45,10 @@ import uy.com.temperoni.recipes.ui.state.ScreenState
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipeDetailViewModel
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.IntOffset
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
@@ -53,30 +59,46 @@ class DetailActivity : AppCompatActivity() {
 
         setContent {
             RecetasTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    val scaffoldState = rememberScaffoldState()
-                    val scope = rememberCoroutineScope()
-                    Scaffold(
-                        scaffoldState = scaffoldState,
-                        topBar = {
-                            TopAppBar(
-                                title = {},
-                                navigationIcon = {
-                                    IconButton(
-                                        onClick = {
-                                            finish()
-                                        }
-                                    ) {
-                                        Icon(Icons.Filled.ArrowBack, contentDescription = "Localized description")
-                                    }
-                                }
-                            )
-                        },
-                        content = { innerPadding ->
-                            Content(intent.getIntExtra("id", -1), viewModel)
+
+                val toolbarHeight = 56.dp
+                val toolbarHeightPx = with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() }
+                val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
+                val nestedScrollConnection = remember {
+                    object : NestedScrollConnection {
+                        override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                            val delta = available.y
+                            val newOffset = toolbarOffsetHeightPx.value + delta
+                            toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
+
+                            return Offset.Zero
                         }
-                    )
+                    }
+                }
+
+                Surface(color = MaterialTheme.colors.background) {
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            // attach as a parent to the nested scroll system
+                            .nestedScroll(nestedScrollConnection)
+                    ) {
+                        Content(intent.getIntExtra("id", -1), viewModel)
+                        TopAppBar(
+                            title = {},
+                            navigationIcon = {
+                                IconButton(
+                                    onClick = {
+                                        finish()
+                                    }
+                                ) {
+                                    Icon(Icons.Filled.ArrowBack, contentDescription = "Localized description")
+                                }
+                            },
+                            modifier = Modifier
+                                .height(toolbarHeight)
+                                .offset { IntOffset(x = 0, y = toolbarOffsetHeightPx.value.roundToInt()) }
+                        )
+                    }
                 }
             }
         }
