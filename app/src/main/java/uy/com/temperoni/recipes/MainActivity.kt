@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -33,7 +34,7 @@ import uy.com.temperoni.recipes.ui.theme.Shapes
 import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -63,8 +64,8 @@ class MainActivity : ComponentActivity() {
 }
 
 // TODO use navigation
-fun goToDetail(context: Context, id: Int) {
-    context.startActivity(Intent(context, DetailActivity::class.java).putExtra("id", id))
+fun goToDetail(context: Context, id: Int, title: String) {
+    context.startActivity(Intent(context, DetailActivity::class.java).putExtra("id", id).putExtra("title", title))
 }
 
 @Composable
@@ -81,7 +82,7 @@ fun RecipesBook(viewModel: RecipesViewModel) {
                 CircularProgressIndicator()
             }
         }
-        LIST -> LazyColumn(Modifier.padding(8.dp, 4.dp)) {
+        LIST -> LazyColumn(Modifier.padding(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             items(recipesBook.items) { recipe ->
                 RecipeRow(recipe)
             }
@@ -98,7 +99,7 @@ fun RecipeRow(recipe: Recipe) {
     Surface(elevation = 4.dp, modifier = Modifier
         .height(200.dp)
         .padding(0.dp, 4.dp)
-        .clickable { goToDetail(context, recipe.id!!) }, shape = Shapes.medium
+        .clickable { goToDetail(context, recipe.id!!, recipe.name!!) }, shape = Shapes.medium
     ) {
         Image(
             painter = rememberImagePainter(

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
@@ -39,9 +41,11 @@ import uy.com.temperoni.recipes.ui.state.RecipeDetailUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipeDetailViewModel
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.vectorResource
 
 @AndroidEntryPoint
-class DetailActivity : ComponentActivity() {
+class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,30 +55,28 @@ class DetailActivity : ComponentActivity() {
             RecetasTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Surface(color = MaterialTheme.colors.background) {
-                        val scaffoldState = rememberScaffoldState()
-                        val scope = rememberCoroutineScope()
-                        Scaffold(
-                            scaffoldState = scaffoldState,
-                            topBar = {
-                                TopAppBar(
-                                    title = {},
-                                    navigationIcon = {
-                                        IconButton(
-                                            onClick = {
-                                                finish()
-                                            }
-                                        ) {
-                                            Icon(Icons.Filled.ArrowBack, contentDescription = "Localized description")
+                    val scaffoldState = rememberScaffoldState()
+                    val scope = rememberCoroutineScope()
+                    Scaffold(
+                        scaffoldState = scaffoldState,
+                        topBar = {
+                            TopAppBar(
+                                title = {},
+                                navigationIcon = {
+                                    IconButton(
+                                        onClick = {
+                                            finish()
                                         }
+                                    ) {
+                                        Icon(Icons.Filled.ArrowBack, contentDescription = "Localized description")
                                     }
-                                )
-                            },
-                            content = { innerPadding ->
-                                Content(intent.getIntExtra("id", -1), viewModel)
-                            }
-                        )
-                    }
+                                }
+                            )
+                        },
+                        content = { innerPadding ->
+                            Content(intent.getIntExtra("id", -1), viewModel)
+                        }
+                    )
                 }
             }
         }
@@ -128,22 +130,23 @@ fun Detail(recipe: Recipe) {
         Surface(
             modifier = Modifier
                 .fillMaxWidth(1f)
-                .fillMaxHeight(1f), shape = RoundedCornerShape(4.dp, 4.dp, 0.dp, 0.dp)
+                .fillMaxHeight(1f)
         ) {
             Column {
                 Text(
                     color = Color.Black,
                     text = recipe.name!!,
                     modifier = Modifier.padding(8.dp),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    fontSize = 32.sp
                 )
 
+                SubTitle("DESCRIPCION")
+
                 Text(
-                    color = Color.Gray,
+                    color = Color.Black,
                     text = recipe.introduction!!,
                     modifier = Modifier.padding(8.dp),
-                    fontSize = 14.sp
+                    fontSize = 16.sp
                 )
 
                 Tabs(recipe)
@@ -242,13 +245,13 @@ fun Tabs(recipe: Recipe) {
     var state by remember { mutableStateOf(0) }
     TabRow(selectedTabIndex = state) {
         Tab(
-            icon = { Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "") },
+            icon = { Icon(imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_kitchen_24), contentDescription = "") },
             text = { Text("INGREDIENTES") },
             selected = state == 0,
             onClick = { state = 0 }
         )
         Tab(
-            icon = { Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "") },
+            icon = { Icon(imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_format_list_numbered_24), contentDescription = "") },
             text = { Text("PASOS") },
             selected = state == 1,
             onClick = { state = 1 }
