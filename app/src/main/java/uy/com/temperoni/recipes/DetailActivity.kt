@@ -275,34 +275,29 @@ fun Steps(instructions: List<InstructionItem?>) {
     }
 }
 
+private enum class DetailsTabs(val text: String, val icon: Int) {
+    Ingredients("INGREDIENTES", R.drawable.ic_baseline_kitchen_24),
+    Steps("PASOS", R.drawable.ic_baseline_format_list_numbered_24)
+}
+
 @Composable
 fun Tabs(recipe: Recipe) {
     var state by remember { mutableStateOf(0) }
     TabRow(selectedTabIndex = state) {
-        Tab(
-            icon = {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_kitchen_24),
-                    tint = Color.White,
-                    contentDescription = ""
-                )
-            },
-            text = { Text("INGREDIENTES") },
-            selected = state == 0,
-            onClick = { state = 0 }
-        )
-        Tab(
-            icon = {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_baseline_format_list_numbered_24),
-                    tint = Color.White,
-                    contentDescription = ""
-                )
-            },
-            text = { Text("PASOS") },
-            selected = state == 1,
-            onClick = { state = 1 }
-        )
+        DetailsTabs.values().forEachIndexed { index, tab ->
+            Tab(
+                icon = {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = tab.icon),
+                        contentDescription = ""
+                    )
+                },
+                text = { Text(tab.text) },
+                selected = state == index,
+                onClick = { state = index },
+                selectedContentColor = Color.White
+            )
+        }
     }
 
     when (state) {

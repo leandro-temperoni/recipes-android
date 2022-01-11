@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -115,7 +116,7 @@ fun RecipeRow(recipe: Recipe) {
         )
         Box(modifier = Modifier.fillMaxWidth(1f), contentAlignment = Alignment.BottomStart) {
             Text(
-                color = MaterialTheme.colors.onSurface,
+                color = Color.White,
                 text = recipe.name!!,
                 modifier = Modifier.padding(8.dp)
             )
