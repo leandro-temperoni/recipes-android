@@ -1,6 +1,5 @@
 package uy.com.temperoni.recipes.repository
 
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken;
 import uy.com.temperoni.recipes.dto.Recipe
@@ -46,7 +45,6 @@ class RecipesApi @Inject constructor(private val gson: Gson) {
 
             while (line != null) {
                 buffer.append(line+"\n");
-                Log.d("Response: ", "> $line");   //here u ll get whole response...... :-)
                 line = reader.readLine()
             }
 

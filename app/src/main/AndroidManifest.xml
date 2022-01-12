@@ -13,12 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Recetas.NoActionBar">
         <activity
-            android:name=".DetailActivity"
+            android:name=".ui.activities.DetailActivity"
             android:exported="false"
             android:label="@string/title_activity_detail"
             android:theme="@style/Theme.Recetas.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Recetas.NoActionBar">
