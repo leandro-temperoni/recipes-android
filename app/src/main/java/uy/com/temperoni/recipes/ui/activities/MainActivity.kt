@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 // TODO use navigation
+// https://developer.android.com/codelabs/jetpack-compose-navigation
 fun goToDetail(context: Context, id: Int, title: String) {
     context.startActivity(Intent(context, DetailActivity::class.java).putExtra("id", id).putExtra("title", title))
 }
