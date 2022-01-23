@@ -11,12 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
+import uy.com.temperoni.recipes.ui.compose.commons.ErrorMessage
 import uy.com.temperoni.recipes.ui.compose.commons.Loading
 import uy.com.temperoni.recipes.ui.compose.list.List
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
-import uy.com.temperoni.recipes.ui.state.ScreenState.LIST
-import uy.com.temperoni.recipes.ui.state.ScreenState.LOADING
+import uy.com.temperoni.recipes.ui.state.ScreenState.*
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
 
@@ -64,8 +65,9 @@ fun Content(viewModel: RecipesViewModel) {
     when (recipesBook.state) {
         LOADING -> Loading()
         LIST -> List(recipesBook = recipesBook)
+        ERROR -> ErrorMessage(message = "Ocurrió un error al cargar el recetario")
         else -> {
-            // TODO error screen and none
+            // Do nothing
         }
     }
 }

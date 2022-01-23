@@ -24,7 +24,7 @@ class RecipesApi @Inject constructor(private val gson: Gson) {
     }
 
     fun getRecipeDetail(id: Int): Recipe {
-        return gson.fromJson(getJson("$API_URL/$id"), Recipe::class.java)
+        return gson.fromJson(getJson("${API_URL}/$id"), Recipe::class.java)
     }
 
     private fun getJson(urlString: String): String {
@@ -51,7 +51,7 @@ class RecipesApi @Inject constructor(private val gson: Gson) {
             return buffer.toString();
 
         } catch (e: Exception) {
-            return "{}"
+            throw IOException()
         } finally {
             connection?.disconnect()
             try {

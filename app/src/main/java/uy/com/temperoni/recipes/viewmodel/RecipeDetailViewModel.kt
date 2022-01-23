@@ -30,7 +30,9 @@ class RecipeDetailViewModel @Inject constructor(
         viewModelScope.launch {
             repository.fetchRecipe(id)
                 .catch {
-                    // TODO add error case
+                    recipeDetailState!!.value = RecipeDetailUiState().apply {
+                        state = ScreenState.ERROR
+                    }
                 }
                 .collect { response ->
                     recipeDetailState!!.value = RecipeDetailUiState().apply {

@@ -63,7 +63,8 @@ fun DetailTabs(recipe: Recipe) {
                 icon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = tab.icon),
-                        contentDescription = ""
+                        contentDescription = "",
+                        tint = MaterialTheme.colors.onSurface
                     )
                 },
                 text = { Text(tab.text) },

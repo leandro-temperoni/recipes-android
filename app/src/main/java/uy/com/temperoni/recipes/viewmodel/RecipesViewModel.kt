@@ -35,7 +35,9 @@ class RecipesViewModel @Inject constructor(
             // yield() // ensureActive() // TODO test this methods behaviour
             repository.fetchRecipes()
                 .catch {
-                    // TODO add error case
+                    recipesBookStateRecipes!!.value = RecipesUiState().apply {
+                        state = ScreenState.ERROR
+                    }
                 }
                 .collect { response ->
                     recipesBookStateRecipes!!.value = RecipesUiState().apply {
