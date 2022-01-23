@@ -1,6 +1,6 @@
 package uy.com.temperoni.recipes.ui.state
 
-import uy.com.temperoni.recipes.dto.Recipe
+import uy.com.temperoni.recipes.ui.model.Recipe
 
 class RecipesUiState {
 

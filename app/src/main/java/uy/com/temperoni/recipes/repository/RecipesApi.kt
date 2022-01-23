@@ -2,7 +2,7 @@ package uy.com.temperoni.recipes.repository
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken;
-import uy.com.temperoni.recipes.dto.Recipe
+import uy.com.temperoni.recipes.dto.RecipeDto
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
@@ -18,13 +18,13 @@ class RecipesApi @Inject constructor(private val gson: Gson) {
         const val API_URL = "https://tempe-recipes-api.herokuapp.com/recipes"
     }
 
-    fun getRecipesList(): List<Recipe> {
-        val userListType: Type = object : TypeToken<ArrayList<Recipe?>?>() {}.getType()
+    fun getRecipesList(): List<RecipeDto> {
+        val userListType: Type = object : TypeToken<ArrayList<RecipeDto?>?>() {}.getType()
         return gson.fromJson(getJson(API_URL), userListType)
     }
 
-    fun getRecipeDetail(id: Int): Recipe {
-        return gson.fromJson(getJson("${API_URL}/$id"), Recipe::class.java)
+    fun getRecipeDetail(id: Int): RecipeDto {
+        return gson.fromJson(getJson("${API_URL}/$id"), RecipeDto::class.java)
     }
 
     private fun getJson(urlString: String): String {

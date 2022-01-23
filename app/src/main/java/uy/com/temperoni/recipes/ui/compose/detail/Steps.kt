@@ -9,10 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import uy.com.temperoni.recipes.dto.InstructionItem
+import uy.com.temperoni.recipes.dto.InstructionDto
+import uy.com.temperoni.recipes.ui.model.Instruction
 
 
 @Composable
@@ -46,13 +45,13 @@ fun Step(text: String, index: Int) {
 }
 
 @Composable
-fun Steps(instructions: List<InstructionItem?>) {
+fun Steps(instructions: List<Instruction>) {
     instructions.forEach { instructionItem ->
-        if (!instructionItem?.description.isNullOrBlank()) {
-            SubTitle(instructionItem?.description!!)
+        if (instructionItem.description.isNotBlank()) {
+            SubTitle(instructionItem.description)
         }
-        instructionItem?.steps?.forEachIndexed { index, step ->
-            Step(step!!, index)
+        instructionItem.steps.forEachIndexed { index, step ->
+            Step(step, index)
         }
     }
 }

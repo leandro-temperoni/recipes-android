@@ -8,12 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import uy.com.temperoni.recipes.dto.Ingredient
+import uy.com.temperoni.recipes.ui.model.Ingredient
 
 @Composable
 fun Ingredient(data: Ingredient) {
@@ -24,7 +22,7 @@ fun Ingredient(data: Ingredient) {
     ) {
         Text(
             color = MaterialTheme.colors.onSurface,
-            text = "${data.name}",
+            text = data.name,
             modifier = Modifier.weight(.6f),
             style = MaterialTheme.typography.body1,
             maxLines = 2,
@@ -32,7 +30,7 @@ fun Ingredient(data: Ingredient) {
         )
         Text(
             color = MaterialTheme.colors.primary,
-            text = "${data.amount}",
+            text = data.amount,
             modifier = Modifier.weight(.4f),
             textAlign = TextAlign.End,
             style = MaterialTheme.typography.body2,
@@ -43,8 +41,8 @@ fun Ingredient(data: Ingredient) {
 }
 
 @Composable
-fun Ingredients(ingredients: List<Ingredient?>) {
+fun Ingredients(ingredients: List<Ingredient>) {
     ingredients.forEach { ingredient ->
-        Ingredient(data = ingredient!!)
+        Ingredient(data = ingredient)
     }
 }

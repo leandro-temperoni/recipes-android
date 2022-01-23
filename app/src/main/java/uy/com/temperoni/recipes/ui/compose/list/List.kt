@@ -15,8 +15,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import uy.com.temperoni.recipes.dto.Recipe
 import uy.com.temperoni.recipes.ui.activities.goToDetail
+import uy.com.temperoni.recipes.ui.model.Recipe
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.theme.Shapes
 
@@ -35,7 +35,7 @@ fun RecipeRow(recipe: Recipe) {
     Card(elevation = 8.dp, modifier = Modifier
         .height(200.dp)
         .padding(0.dp, 4.dp)
-        .clickable { goToDetail(context, recipe.id!!, recipe.name!!) }, shape = Shapes.medium
+        .clickable { goToDetail(context, recipe.id, recipe.name) }, shape = Shapes.medium
     ) {
         Image(
             painter = rememberImagePainter(
@@ -51,7 +51,7 @@ fun RecipeRow(recipe: Recipe) {
         Box(modifier = Modifier.fillMaxWidth(1f), contentAlignment = Alignment.BottomStart) {
             Text(
                 color = Color.White,
-                text = recipe.name!!,
+                text = recipe.name,
                 modifier = Modifier.padding(8.dp)
             )
         }

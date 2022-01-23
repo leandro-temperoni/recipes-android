@@ -1,9 +1,9 @@
 package uy.com.temperoni.recipes.ui.state
 
-import uy.com.temperoni.recipes.dto.Recipe
+import uy.com.temperoni.recipes.ui.model.Recipe
 
 class RecipeDetailUiState {
 
-    var item: Recipe = Recipe()
+    lateinit var item: Recipe
     var state: ScreenState = ScreenState.LOADING
 }

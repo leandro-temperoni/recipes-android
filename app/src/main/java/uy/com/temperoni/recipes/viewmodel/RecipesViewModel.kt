@@ -7,8 +7,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
+import uy.com.temperoni.recipes.mappers.RecipesMapper
 import uy.com.temperoni.recipes.repository.RecipesRepository
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState
@@ -17,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     private val repository: RecipesRepository,
+    private val mapper: RecipesMapper,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -38,6 +42,9 @@ class RecipesViewModel @Inject constructor(
                     recipesBookStateRecipes!!.value = RecipesUiState().apply {
                         state = ScreenState.ERROR
                     }
+                }
+                .map { response ->
+                    mapper.mapRecipes(response)
                 }
                 .collect { response ->
                     recipesBookStateRecipes!!.value = RecipesUiState().apply {

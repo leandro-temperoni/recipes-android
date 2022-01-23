@@ -11,7 +11,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
-import uy.com.temperoni.recipes.dto.Recipe
+import uy.com.temperoni.recipes.dto.RecipeDto
 
 class RecipesRepositoryTest {
 
@@ -36,7 +36,7 @@ class RecipesRepositoryTest {
     @Test
     fun whenCallingFetchRecipes_shouldCallApiToGetRecipesList(): Unit = runBlocking {
         // Arrange
-        val data = emptyList<Recipe>()
+        val data = emptyList<RecipeDto>()
         `when`(api.getRecipesList()).thenReturn(data)
 
         // Act
@@ -51,7 +51,7 @@ class RecipesRepositoryTest {
     fun givenAnId_whenCallingFetchRecipe_shouldCallApiToGetRecipeDetailWithThatSameId(): Unit = runBlocking {
         // Arrange
         val id = 3
-        val data = Recipe(id)
+        val data = RecipeDto(id)
         `when`(api.getRecipeDetail(id)).thenReturn(data)
 
         // Act

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import uy.com.temperoni.recipes.R
-import uy.com.temperoni.recipes.dto.Recipe
+import uy.com.temperoni.recipes.ui.model.Recipe
 
 @Composable
 fun DetailImage(url: String) {
@@ -63,8 +63,7 @@ fun DetailTabs(recipe: Recipe) {
                 icon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = tab.icon),
-                        contentDescription = "",
-                        tint = MaterialTheme.colors.onSurface
+                        contentDescription = ""
                     )
                 },
                 text = { Text(tab.text) },
@@ -75,8 +74,8 @@ fun DetailTabs(recipe: Recipe) {
     }
 
     when (state) {
-        0 -> Ingredients(ingredients = recipe.ingredients!!)
-        1 -> Steps(instructions = recipe.instructions!!)
+        0 -> Ingredients(ingredients = recipe.ingredients)
+        1 -> Steps(instructions = recipe.instructions)
         else -> {}
     }
 }

@@ -20,14 +20,13 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
-import uy.com.temperoni.recipes.dto.Recipe
 import uy.com.temperoni.recipes.ui.compose.commons.ErrorMessage
 import uy.com.temperoni.recipes.ui.compose.commons.Loading
 import uy.com.temperoni.recipes.ui.compose.detail.DetailImage
 import uy.com.temperoni.recipes.ui.compose.detail.DetailSummary
 import uy.com.temperoni.recipes.ui.compose.detail.DetailTabs
+import uy.com.temperoni.recipes.ui.model.Recipe
 import uy.com.temperoni.recipes.ui.state.RecipeDetailUiState
-import uy.com.temperoni.recipes.ui.state.ScreenState
 import uy.com.temperoni.recipes.ui.state.ScreenState.*
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipeDetailViewModel
@@ -126,9 +125,9 @@ fun Detail(recipe: Recipe) {
             .fillMaxHeight(1f)
             .verticalScroll(ScrollState(0))
     ) {
-        DetailImage(url = recipe.image!!)
+        DetailImage(url = recipe.image)
 
-        DetailSummary(name = recipe.name!!, recipe.introduction!!)
+        DetailSummary(name = recipe.name, recipe.introduction)
 
         DetailTabs(recipe)
     }
