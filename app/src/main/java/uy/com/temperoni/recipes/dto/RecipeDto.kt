@@ -4,7 +4,7 @@ package uy.com.temperoni.recipes.dto
  * @author Leandro Temperoni
  */
 data class RecipeDto(var id: Int? = 0,
-                     var image: String? = "",
+                     var images: List<String>? = emptyList(),
                      var ingredients: List<IngredientDto?>? = null,
                      var introduction: String? = "",
                      var name: String? = null,

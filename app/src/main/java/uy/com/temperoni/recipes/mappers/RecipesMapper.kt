@@ -24,7 +24,7 @@ class RecipesMapper @Inject constructor() {
     fun mapRecipe(data: RecipeDto): Recipe {
         return Recipe(
             data.id ?: -1,
-            data.image ?: "",
+            data.images?.getOrNull(0) ?: "",
             mapIngredient(data.ingredients ?: emptyList()),
             data.introduction ?: "",
             data.name ?: "",
