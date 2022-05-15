@@ -6,9 +6,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import uy.com.temperoni.recipes.dto.IngredientDto
-import uy.com.temperoni.recipes.dto.InstructionDto
-import uy.com.temperoni.recipes.dto.RecipeDto
 import uy.com.temperoni.recipes.ui.model.Ingredient
 import uy.com.temperoni.recipes.ui.model.Instruction
 import uy.com.temperoni.recipes.ui.model.Recipe
@@ -92,7 +89,7 @@ class DetailActivityTest {
 
     private fun mockRecipe() = Recipe(
         id = 1,
-        image = "",
+        images = listOf(""),
         introduction = "Intro",
         name = "Receta 1",
         ingredients = listOf(Ingredient("300 gr", "Azucar"), Ingredient("2 tazas", "Harina")),

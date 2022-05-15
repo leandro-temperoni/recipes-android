@@ -19,6 +19,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import uy.com.temperoni.recipes.ui.compose.commons.ErrorMessage
 import uy.com.temperoni.recipes.ui.compose.commons.Loading
@@ -32,6 +33,7 @@ import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipeDetailViewModel
 import kotlin.math.roundToInt
 
+@ExperimentalPagerApi
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
@@ -103,6 +105,7 @@ class DetailActivity : AppCompatActivity() {
     }
 }
 
+@ExperimentalPagerApi
 @Composable
 fun Content(id: Int, viewModel: RecipeDetailViewModel) {
     val recipe: RecipeDetailUiState by viewModel.getRecipe(id).collectAsState()
@@ -117,6 +120,7 @@ fun Content(id: Int, viewModel: RecipeDetailViewModel) {
     }
 }
 
+@ExperimentalPagerApi
 @Composable
 fun Detail(recipe: Recipe) {
     Column(
@@ -125,7 +129,7 @@ fun Detail(recipe: Recipe) {
             .fillMaxHeight(1f)
             .verticalScroll(ScrollState(0))
     ) {
-        DetailImage(url = recipe.image)
+        DetailImage(urls = recipe.images)
 
         DetailSummary(name = recipe.name, recipe.introduction)
 
