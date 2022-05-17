@@ -33,13 +33,13 @@ fun List(recipesBook: RecipesUiState) {
 fun RecipeRow(recipe: Recipe) {
     val context = LocalContext.current
     Card(elevation = 8.dp, modifier = Modifier
-        .height(200.dp)
-        .padding(0.dp, 4.dp)
+        .height(300.dp)
+        .padding(0.dp, 6.dp)
         .clickable { goToDetail(context, recipe.id, recipe.name) }, shape = Shapes.medium
     ) {
         Image(
             painter = rememberImagePainter(
-                data = recipe.image,
+                data = recipe.images.getOrNull(0),
                 builder = {
                     crossfade(true)
                 }

@@ -6,10 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import uy.com.temperoni.recipes.dto.RecipeDto
 import uy.com.temperoni.recipes.ui.compose.list.List
-import uy.com.temperoni.recipes.ui.model.Ingredient
-import uy.com.temperoni.recipes.ui.model.Instruction
 import uy.com.temperoni.recipes.ui.model.Recipe
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState
@@ -45,7 +42,7 @@ class MainActivityTest {
 
     private fun mockRecipe(id: Int, name: String) = Recipe(
         id = id,
-        image = "",
+        images = listOf(""),
         introduction = "",
         name = name,
         ingredients = emptyList(),
