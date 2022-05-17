@@ -41,7 +41,7 @@ class RecipesViewModelTest {
 
     private fun mockRecipe(id: Int) = Recipe(
         id = id,
-        image = "",
+        images = listOf(""),
         introduction = "",
         name = "name",
         ingredients = emptyList(),

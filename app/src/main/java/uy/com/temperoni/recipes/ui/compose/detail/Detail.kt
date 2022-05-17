@@ -1,11 +1,10 @@
 package uy.com.temperoni.recipes.ui.compose.detail
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -15,24 +14,41 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.PagerState
 import uy.com.temperoni.recipes.R
 import uy.com.temperoni.recipes.ui.model.Recipe
 
+@ExperimentalPagerApi
 @Composable
-fun DetailImage(url: String) {
-    Image(
-        painter = rememberImagePainter(
-            data = url,
-            builder = {
-                crossfade(true)
-            }
-        ),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        modifier = Modifier
-            .fillMaxWidth(1f)
-            .height(350.dp)
-    )
+fun DetailImage(urls: List<String>) {
+    val pagerState = remember {
+        PagerState()
+    }
+    HorizontalPager(count = urls.size, state = pagerState) { index ->
+        Box(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = rememberImagePainter(
+                    data = urls[index],
+                    builder = {
+                        crossfade(true)
+                    }
+                ),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth(1f)
+                    .height(400.dp)
+            )
+        }
+
+        Box(modifier = Modifier.fillMaxWidth(1f),
+            contentAlignment = Alignment.BottomStart) {
+            HorizontalPagerIndicator(pagerState)
+        }
+    }
 }
 
 @Composable
