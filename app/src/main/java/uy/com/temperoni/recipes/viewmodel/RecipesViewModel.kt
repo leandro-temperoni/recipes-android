@@ -25,6 +25,11 @@ class RecipesViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var recipesBookStateRecipes: MutableStateFlow<RecipesUiState>? = null
+    val isLoading = MutableStateFlow(true)
+
+    init {
+        getRecipes()
+    }
 
     fun getRecipes(): MutableStateFlow<RecipesUiState> {
         if (recipesBookStateRecipes == null) {
@@ -39,6 +44,7 @@ class RecipesViewModel @Inject constructor(
             // yield() // ensureActive() // TODO test this methods behaviour
             repository.fetchRecipes()
                 .catch {
+                    isLoading.value = false
                     recipesBookStateRecipes!!.value = RecipesUiState().apply {
                         state = ScreenState.ERROR
                     }
@@ -47,6 +53,7 @@ class RecipesViewModel @Inject constructor(
                     mapper.mapRecipes(response)
                 }
                 .collect { response ->
+                    isLoading.value = false
                     recipesBookStateRecipes!!.value = RecipesUiState().apply {
                         items = response
                         state = ScreenState.LIST

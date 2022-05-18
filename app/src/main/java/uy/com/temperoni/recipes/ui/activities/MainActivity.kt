@@ -12,6 +12,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import uy.com.temperoni.recipes.ui.compose.commons.ErrorMessage
 import uy.com.temperoni.recipes.ui.compose.commons.Loading
@@ -21,6 +23,7 @@ import uy.com.temperoni.recipes.ui.state.ScreenState.*
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
 
+@ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val viewModel: RecipesViewModel by viewModels()
+
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                viewModel.isLoading.value
+            }
+        }
 
         setContent {
             RecetasTheme {
@@ -54,16 +63,17 @@ class MainActivity : AppCompatActivity() {
 
 // TODO use navigation
 // https://developer.android.com/codelabs/jetpack-compose-navigation
+@ExperimentalPagerApi
 fun goToDetail(context: Context, id: Int, title: String) {
     context.startActivity(Intent(context, DetailActivity::class.java).putExtra("id", id).putExtra("title", title))
 }
 
+@ExperimentalPagerApi
 @Composable
 fun Content(viewModel: RecipesViewModel) {
     val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
     when (recipesBook.state) {
-        LOADING -> Loading()
         LIST -> List(recipesBook = recipesBook)
         ERROR -> ErrorMessage(message = "Ocurrió un error al cargar el recetario")
         else -> {
