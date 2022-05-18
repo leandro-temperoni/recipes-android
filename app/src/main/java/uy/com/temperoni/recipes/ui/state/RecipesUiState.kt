@@ -4,6 +4,7 @@ import uy.com.temperoni.recipes.ui.model.Recipe
 
 class RecipesUiState {
 
-    var items: List<Recipe> = listOf()
+    var desserts: List<Recipe> = listOf()
+    var preparations: List<Recipe> = listOf()
     var state: ScreenState = ScreenState.LOADING
 }

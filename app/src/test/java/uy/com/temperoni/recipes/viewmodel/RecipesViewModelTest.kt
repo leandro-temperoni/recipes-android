@@ -36,7 +36,7 @@ class RecipesViewModelTest {
         // Assert
         verify(repo).fetchRecipes()
         assert(ScreenState.LIST == viewModel.getRecipes().value.state)
-        assert(list.size == viewModel.getRecipes().value.items.size)
+        assert(list.size == viewModel.getRecipes().value.desserts.size)
     }
 
     private fun mockRecipe(id: Int) = Recipe(

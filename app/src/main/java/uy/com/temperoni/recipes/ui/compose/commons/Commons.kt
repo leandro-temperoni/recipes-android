@@ -27,7 +27,7 @@ fun Loading() {
 }
 
 @Composable
-fun ErrorMessage(message: String) {
+fun InformativeMessage(message: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth(1f)

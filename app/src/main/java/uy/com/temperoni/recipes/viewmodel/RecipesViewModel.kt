@@ -4,13 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.yield
 import uy.com.temperoni.recipes.mappers.RecipesMapper
 import uy.com.temperoni.recipes.repository.RecipesRepository
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
@@ -56,7 +53,8 @@ class RecipesViewModel @Inject constructor(
                 }
                 .collect { response ->
                     recipesBookStateRecipes!!.value = RecipesUiState().apply {
-                        items = response
+                        desserts = response.filter { it.id <= 11 }
+                        preparations = response.filter { it.id > 11 }
                         state = ScreenState.LIST
                     }
                 }
