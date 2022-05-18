@@ -43,46 +43,43 @@ class DetailActivity : AppCompatActivity() {
         val viewModel: RecipeDetailViewModel by viewModels()
 
         setContent {
-            RecetasTheme {
+            val toolbarHeight = 56.dp
+            val toolbarHeightPx =
+                with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() }
+            val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
+            val nestedScrollConnection = remember {
+                CustomNestedScrollConnection(toolbarHeightPx, toolbarOffsetHeightPx)
+            }
 
-                val toolbarHeight = 56.dp
-                val toolbarHeightPx =
-                    with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() }
-                val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
-                val nestedScrollConnection = remember {
-                    CustomNestedScrollConnection(toolbarHeightPx, toolbarOffsetHeightPx)
-                }
-
-                Surface(color = MaterialTheme.colors.background) {
-                    Box(
-                        Modifier
-                            .fillMaxSize()
-                            // attach as a parent to the nested scroll system
-                            .nestedScroll(nestedScrollConnection)
-                    ) {
-                        Content(intent.getIntExtra("id", -1), viewModel)
-                        TopAppBar(
-                            title = {},
-                            navigationIcon = {
-                                IconButton(
-                                    onClick = { finish() }
-                                ) {
-                                    Icon(
-                                        Icons.Filled.ArrowBack,
-                                        contentDescription = "Localized description"
-                                    )
-                                }
-                            },
-                            modifier = Modifier
-                                .height(toolbarHeight)
-                                .offset {
-                                    IntOffset(
-                                        x = 0,
-                                        y = toolbarOffsetHeightPx.value.roundToInt()
-                                    )
-                                }
-                        )
-                    }
+            Surface(color = MaterialTheme.colors.background) {
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        // attach as a parent to the nested scroll system
+                        .nestedScroll(nestedScrollConnection)
+                ) {
+                    Content(intent.getIntExtra("id", -1), viewModel)
+                    TopAppBar(
+                        title = {},
+                        navigationIcon = {
+                            IconButton(
+                                onClick = { finish() }
+                            ) {
+                                Icon(
+                                    Icons.Filled.ArrowBack,
+                                    contentDescription = "Localized description"
+                                )
+                            }
+                        },
+                        modifier = Modifier
+                            .height(toolbarHeight)
+                            .offset {
+                                IntOffset(
+                                    x = 0,
+                                    y = toolbarOffsetHeightPx.value.roundToInt()
+                                )
+                            }
+                    )
                 }
             }
         }

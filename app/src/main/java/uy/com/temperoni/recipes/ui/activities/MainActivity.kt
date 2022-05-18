@@ -39,23 +39,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContent {
-            RecetasTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    val scaffoldState = rememberScaffoldState()
-                    val scope = rememberCoroutineScope()
-                    Scaffold(
-                        scaffoldState = scaffoldState,
-                        topBar = {
-                            TopAppBar(
-                                title = { Text("Recetario") }
-                            )
-                        },
-                        content = {
-                            Content(viewModel)
-                        }
-                    )
-                }
+            // A surface container using the 'background' color from the theme
+            Surface(color = MaterialTheme.colors.background) {
+                val scaffoldState = rememberScaffoldState()
+                val scope = rememberCoroutineScope()
+                Scaffold(
+                    scaffoldState = scaffoldState,
+                    topBar = {
+                        TopAppBar(
+                            title = { Text("Recetario") }
+                        )
+                    },
+                    content = {
+                        Content(viewModel)
+                    }
+                )
             }
         }
     }
