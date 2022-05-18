@@ -15,11 +15,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.google.accompanist.pager.ExperimentalPagerApi
 import uy.com.temperoni.recipes.ui.activities.goToDetail
 import uy.com.temperoni.recipes.ui.model.Recipe
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.theme.Shapes
 
+@ExperimentalPagerApi
 @Composable
 fun List(recipesBook: RecipesUiState) {
     LazyColumn(Modifier.padding(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -29,6 +31,7 @@ fun List(recipesBook: RecipesUiState) {
     }
 }
 
+@ExperimentalPagerApi
 @Composable
 fun RecipeRow(recipe: Recipe) {
     val context = LocalContext.current
