@@ -7,8 +7,8 @@ class RecipesUiState {
     var desserts: List<Recipe> = listOf()
     var preparations: List<Recipe> = listOf()
 
-    fun hasDesserts() = desserts.isNotEmpty()
-    fun hasPreparations() = preparations.isNotEmpty()
+    var hasDesserts = false
+    var hasPreparations = false
 
     var state: ScreenState = ScreenState.LOADING
 }

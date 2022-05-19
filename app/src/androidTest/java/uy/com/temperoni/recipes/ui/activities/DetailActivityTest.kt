@@ -3,6 +3,7 @@ package uy.com.temperoni.recipes.ui.activities
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.accompanist.pager.ExperimentalPagerApi
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,6 +12,7 @@ import uy.com.temperoni.recipes.ui.model.Instruction
 import uy.com.temperoni.recipes.ui.model.Recipe
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 
+@ExperimentalPagerApi
 @RunWith(AndroidJUnit4::class)
 class DetailActivityTest {
 

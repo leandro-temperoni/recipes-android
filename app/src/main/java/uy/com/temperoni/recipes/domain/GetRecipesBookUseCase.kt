@@ -15,7 +15,9 @@ class GetRecipesBookUseCase @Inject constructor() {
         } else {
             RecipesUiState().apply {
                 desserts = response.filter { it.id <= 11 }
+                hasDesserts = desserts.isNotEmpty()
                 preparations = response.filter { it.id > 11 }
+                hasPreparations = preparations.isNotEmpty()
 
                 state = ScreenState.SUCCESS_LIST
             }

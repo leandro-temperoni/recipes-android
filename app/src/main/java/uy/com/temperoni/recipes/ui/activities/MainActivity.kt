@@ -86,8 +86,8 @@ fun Content(viewModel: RecipesViewModel, screen: Screen) {
     when (recipesBook.state) {
         SUCCESS_LIST -> {
             when (screen) {
-                Screen.Desserts -> List(recipesBook.desserts, recipesBook.hasDesserts())
-                else -> List(recipesBook.preparations, recipesBook.hasPreparations())
+                Screen.Desserts -> List(recipesBook.desserts, recipesBook.hasDesserts)
+                else -> List(recipesBook.preparations, recipesBook.hasPreparations)
             }
         }
         ERROR -> GenericMessage(message = "Ocurrió un error al cargar el recetario")
