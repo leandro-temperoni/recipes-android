@@ -26,6 +26,7 @@ import uy.com.temperoni.recipes.ui.compose.navigation.BottomNavBar
 import uy.com.temperoni.recipes.ui.compose.list.List
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState.*
+import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
 
 @ExperimentalPagerApi
@@ -44,26 +45,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContent {
-            // A surface container using the 'background' color from the theme
-            Surface(color = MaterialTheme.colors.background) {
-                val scaffoldState = rememberScaffoldState()
-                val scope = rememberCoroutineScope()
-                val navController = rememberNavController()
-                Scaffold(
-                    scaffoldState = scaffoldState,
-                    topBar = {
-                        TopAppBar(
-                            title = { Text("Recetario") }
-                        )
-                    },
-                    bottomBar = {
-                        BottomNavBar(navController = navController)
-                    }
-                ) { innerPadding ->
-                    NavHost(navController, startDestination = Screen.Desserts.route, Modifier.padding(innerPadding)) {
-                        composable(Screen.Desserts.route) { Content(viewModel, Screen.Desserts) }
-                        composable(Screen.Preparations.route) { Content(viewModel, Screen.Preparations) }
-                        composable(Screen.Chronometer.route) { Chronometer() }
+            RecetasTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(color = MaterialTheme.colors.background) {
+                    val scaffoldState = rememberScaffoldState()
+                    val scope = rememberCoroutineScope()
+                    val navController = rememberNavController()
+                    Scaffold(
+                        scaffoldState = scaffoldState,
+                        topBar = {
+                            TopAppBar(
+                                title = { Text("Recetario") }
+                            )
+                        },
+                        bottomBar = {
+                            BottomNavBar(navController = navController)
+                        }
+                    ) { innerPadding ->
+                        NavHost(navController, startDestination = Screen.Desserts.route, Modifier.padding(innerPadding)) {
+                            composable(Screen.Desserts.route) { Content(viewModel, Screen.Desserts) }
+                            composable(Screen.Preparations.route) { Content(viewModel, Screen.Preparations) }
+                            composable(Screen.Chronometer.route) { Chronometer() }
+                        }
                     }
                 }
             }
