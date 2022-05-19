@@ -23,7 +23,7 @@ class MainActivityTest {
         // Arrange
         val list = listOf(mockRecipe(1, name = "Receta 1"), mockRecipe(2, name = "Receta 2"))
         val state = RecipesUiState().apply {
-            state = ScreenState.LIST
+            state = ScreenState.SUCCESS_LIST
             desserts = list
         }
 

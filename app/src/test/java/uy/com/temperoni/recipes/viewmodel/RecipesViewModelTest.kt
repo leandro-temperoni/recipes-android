@@ -35,7 +35,7 @@ class RecipesViewModelTest {
 
         // Assert
         verify(repo).fetchRecipes()
-        assert(ScreenState.LIST == viewModel.getRecipes().value.state)
+        assert(ScreenState.SUCCESS_LIST == viewModel.getRecipes().value.state)
         assert(list.size == viewModel.getRecipes().value.desserts.size)
     }
 

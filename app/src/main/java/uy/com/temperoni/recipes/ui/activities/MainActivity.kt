@@ -21,8 +21,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import uy.com.temperoni.recipes.ui.compose.navigation.Screen
 import uy.com.temperoni.recipes.ui.compose.commons.Chronometer
-import uy.com.temperoni.recipes.ui.compose.commons.InformativeMessage
-import uy.com.temperoni.recipes.ui.compose.list.BottomNavBar
+import uy.com.temperoni.recipes.ui.compose.commons.GenericMessage
+import uy.com.temperoni.recipes.ui.compose.navigation.BottomNavBar
 import uy.com.temperoni.recipes.ui.compose.list.List
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState.*
@@ -84,9 +84,13 @@ fun Content(viewModel: RecipesViewModel, screen: Screen) {
     val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
     when (recipesBook.state) {
-        LIST -> List(recipesBook = recipesBook, screen)
-        ZRP -> InformativeMessage(message = "Todavia no has cargado nada aqui")
-        ERROR -> InformativeMessage(message = "Ocurrió un error al cargar el recetario")
+        SUCCESS_LIST -> {
+            when (screen) {
+                Screen.Desserts -> List(recipesBook.desserts, recipesBook.hasDesserts())
+                else -> List(recipesBook.preparations, recipesBook.hasPreparations())
+            }
+        }
+        ERROR -> GenericMessage(message = "Ocurrió un error al cargar el recetario")
         else -> {
             // Do nothing
         }

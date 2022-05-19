@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
-import uy.com.temperoni.recipes.ui.compose.commons.InformativeMessage
+import uy.com.temperoni.recipes.ui.compose.commons.GenericMessage
 import uy.com.temperoni.recipes.ui.compose.commons.Loading
 import uy.com.temperoni.recipes.ui.compose.detail.DetailImage
 import uy.com.temperoni.recipes.ui.compose.detail.DetailSummary
@@ -109,7 +109,7 @@ fun Content(id: Int, viewModel: RecipeDetailViewModel) {
     when (recipe.state) {
         LOADING -> Loading()
         DETAIL -> Detail(recipe.item)
-        ERROR -> InformativeMessage(message = "Ocurrió un error al cargar la receta")
+        ERROR -> GenericMessage(message = "Ocurrió un error al cargar la receta")
         else -> {
             // Do nothing
         }

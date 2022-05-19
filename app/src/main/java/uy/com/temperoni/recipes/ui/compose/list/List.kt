@@ -17,30 +17,24 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import uy.com.temperoni.recipes.ui.activities.goToDetail
-import uy.com.temperoni.recipes.ui.compose.navigation.Screen
+import uy.com.temperoni.recipes.ui.compose.commons.GenericMessage
 import uy.com.temperoni.recipes.ui.model.Recipe
-import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.theme.Shapes
 
 @ExperimentalPagerApi
 @Composable
-fun List(recipesBook: RecipesUiState, screen: Screen) {
-    LazyColumn(
-        Modifier.padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(
-            when (screen) {
-                Screen.Desserts -> {
-                    recipesBook.desserts
-                }
-                else -> {
-                    recipesBook.preparations
-                }
+fun List(recipes: List<Recipe>, hasContent: Boolean) {
+    if (hasContent) {
+        LazyColumn(
+            Modifier.padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(recipes) { recipe ->
+                RecipeRow(recipe)
             }
-        ) { recipe ->
-            RecipeRow(recipe)
         }
+    } else {
+        GenericMessage(message = "No has cargado contenido aquí")
     }
 }
 

@@ -1,4 +1,4 @@
-package uy.com.temperoni.recipes.ui.compose.list
+package uy.com.temperoni.recipes.ui.compose.navigation
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -8,11 +8,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import uy.com.temperoni.recipes.ui.compose.navigation.Screen
+import uy.com.temperoni.recipes.R
 
 @Composable
 fun BottomNavBar(navController: NavHostController) {
@@ -26,7 +28,7 @@ fun BottomNavBar(navController: NavHostController) {
         val currentDestination = navBackStackEntry?.destination
         items.forEach { screen ->
             BottomNavigationItem(
-                icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
+                icon = { Icon(ImageVector.vectorResource(screen.icon), contentDescription = null) },
                 label = { Text(screen.route) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {

@@ -1,5 +1,6 @@
 package uy.com.temperoni.recipes.ui.compose.detail
 
+import androidx.annotation.IdRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
