@@ -14,12 +14,13 @@ class GetRecipesBookUseCase @Inject constructor() {
             }
         } else {
             RecipesUiState().apply {
-                desserts = response.filter { it.id <= 11 }
-                hasDesserts = desserts.isNotEmpty()
-                preparations = response.filter { it.id > 11 }
-                hasPreparations = preparations.isNotEmpty()
+                desserts = response
 
-                state = ScreenState.SUCCESS_LIST
+                state = if (desserts.isNotEmpty()){
+                    ScreenState.SUCCESS_LIST
+                } else {
+                    ScreenState.ZRP
+                }
             }
         }
     }

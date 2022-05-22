@@ -23,18 +23,14 @@ import uy.com.temperoni.recipes.ui.theme.Shapes
 
 @ExperimentalPagerApi
 @Composable
-fun List(recipes: List<Recipe>, hasContent: Boolean) {
-    if (hasContent) {
-        LazyColumn(
-            Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(recipes) { recipe ->
-                RecipeRow(recipe)
-            }
+fun List(recipes: List<Recipe>) {
+    LazyColumn(
+        Modifier.padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(recipes) { recipe ->
+            RecipeRow(recipe)
         }
-    } else {
-        GenericMessage(message = "No has cargado contenido aquí")
     }
 }
 

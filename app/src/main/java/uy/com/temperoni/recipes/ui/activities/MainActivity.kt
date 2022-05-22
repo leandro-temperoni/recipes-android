@@ -19,12 +19,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
-import uy.com.temperoni.recipes.ui.compose.navigation.Screen
 import uy.com.temperoni.recipes.ui.compose.commons.Chronometer
 import uy.com.temperoni.recipes.ui.compose.commons.GenericMessage
-import uy.com.temperoni.recipes.ui.compose.navigation.BottomNavBar
+import uy.com.temperoni.recipes.ui.compose.groceries.Groceries
 import uy.com.temperoni.recipes.ui.compose.list.List
+import uy.com.temperoni.recipes.ui.compose.navigation.BottomNavBar
+import uy.com.temperoni.recipes.ui.compose.navigation.Screen
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
+import uy.com.temperoni.recipes.ui.state.ScreenState
 import uy.com.temperoni.recipes.ui.state.ScreenState.*
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
@@ -63,8 +65,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     ) { innerPadding ->
                         NavHost(navController, startDestination = Screen.Desserts.route, Modifier.padding(innerPadding)) {
-                            composable(Screen.Desserts.route) { Content(viewModel, Screen.Desserts) }
-                            composable(Screen.Preparations.route) { Content(viewModel, Screen.Preparations) }
+                            composable(Screen.Desserts.route) { Content(viewModel) }
+                            composable(Screen.Groceries.route) { Groceries() }
                             composable(Screen.Chronometer.route) { Chronometer() }
                         }
                     }
@@ -83,16 +85,12 @@ fun goToDetail(context: Context, id: Int, title: String) {
 
 @ExperimentalPagerApi
 @Composable
-fun Content(viewModel: RecipesViewModel, screen: Screen) {
+fun Content(viewModel: RecipesViewModel) {
     val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
     when (recipesBook.state) {
-        SUCCESS_LIST -> {
-            when (screen) {
-                Screen.Desserts -> List(recipesBook.desserts, recipesBook.hasDesserts)
-                else -> List(recipesBook.preparations, recipesBook.hasPreparations)
-            }
-        }
+        SUCCESS_LIST -> List(recipes = recipesBook.desserts)
+        ZRP -> GenericMessage(message = "No has cargado contenido aquí")
         ERROR -> GenericMessage(message = "Ocurrió un error al cargar el recetario")
         else -> {
             // Do nothing

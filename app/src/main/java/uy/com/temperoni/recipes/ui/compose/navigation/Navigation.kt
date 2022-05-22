@@ -20,7 +20,7 @@ import uy.com.temperoni.recipes.R
 fun BottomNavBar(navController: NavHostController) {
     val items = listOf(
         Screen.Desserts,
-        Screen.Preparations,
+        Screen.Groceries,
         Screen.Chronometer
     )
     BottomNavigation {
