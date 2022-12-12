@@ -59,7 +59,7 @@ class DetailActivity : AppCompatActivity() {
                             // attach as a parent to the nested scroll system
                             .nestedScroll(nestedScrollConnection)
                     ) {
-                        Content(intent.getIntExtra("id", -1), viewModel)
+                        Content(intent.getStringExtra("id") ?: "", viewModel)
                         TopAppBar(
                             title = {},
                             navigationIcon = {
@@ -106,7 +106,7 @@ class DetailActivity : AppCompatActivity() {
 
 @ExperimentalPagerApi
 @Composable
-fun Content(id: Int, viewModel: RecipeDetailViewModel) {
+fun Content(id: String, viewModel: RecipeDetailViewModel) {
     val recipe: RecipeDetailUiState by viewModel.getRecipe(id).collectAsState()
 
     when (recipe.state) {

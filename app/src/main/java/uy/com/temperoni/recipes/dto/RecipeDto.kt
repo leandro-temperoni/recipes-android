@@ -3,8 +3,8 @@ package uy.com.temperoni.recipes.dto
 /**
  * @author Leandro Temperoni
  */
-data class RecipeDto(var id: Int? = 0,
-                     var image: String? = "",
+data class RecipeDto(var id: String? = "",
+                     var images: List<String?>? = null,
                      var ingredients: List<IngredientDto?>? = null,
                      var introduction: String? = "",
                      var name: String? = null,

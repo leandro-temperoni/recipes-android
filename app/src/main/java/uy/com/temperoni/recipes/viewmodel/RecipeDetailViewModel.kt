@@ -21,7 +21,7 @@ class RecipeDetailViewModel @Inject constructor(
 
     private var recipeDetailState: MutableStateFlow<RecipeDetailUiState>? = null
 
-    fun getRecipe(id: Int): MutableStateFlow<RecipeDetailUiState> {
+    fun getRecipe(id: String): MutableStateFlow<RecipeDetailUiState> {
         if (recipeDetailState == null) {
             loadRecipe(id)
             recipeDetailState = MutableStateFlow(RecipeDetailUiState())
@@ -29,7 +29,7 @@ class RecipeDetailViewModel @Inject constructor(
         return recipeDetailState!!
     }
 
-    private fun loadRecipe(id: Int) {
+    private fun loadRecipe(id: String) {
         viewModelScope.launch {
             repository.fetchRecipe(id)
                 .catch {
