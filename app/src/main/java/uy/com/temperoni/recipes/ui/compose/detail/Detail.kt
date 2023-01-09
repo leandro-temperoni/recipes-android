@@ -28,26 +28,34 @@ fun DetailImage(urls: List<String>) {
     val pagerState = remember {
         PagerState()
     }
-    HorizontalPager(count = urls.size, state = pagerState) { index ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            Image(
-                painter = rememberImagePainter(
-                    data = urls[index],
-                    builder = {
-                        crossfade(true)
-                    }
-                ),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth(1f)
-                    .height(400.dp)
-            )
+    Box(modifier = Modifier.fillMaxWidth(1f)) {
+        HorizontalPager(count = urls.size, state = pagerState) { index ->
+            Box(modifier = Modifier.fillMaxSize()) {
+                Image(
+                    painter = rememberImagePainter(
+                        data = urls[index],
+                        builder = {
+                            crossfade(true)
+                        }
+                    ),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth(1f)
+                        .height(400.dp)
+                )
+            }
         }
+    }
 
-        Box(modifier = Modifier.fillMaxWidth(1f),
-            contentAlignment = Alignment.BottomStart) {
-            HorizontalPagerIndicator(pagerState)
+    if (urls.size > 1) {
+        Box(modifier = Modifier.fillMaxWidth(1f)) {
+            HorizontalPagerIndicator(
+                pagerState = pagerState,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(16.dp),
+            )
         }
     }
 }
