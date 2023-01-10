@@ -38,7 +38,7 @@ class RecipesViewModel @Inject constructor(
     }
 
     fun isLoading(): Boolean {
-        return recipesBookStateRecipes!!.value.state != ScreenState.LOADING
+        return recipesBookStateRecipes!!.value.state == ScreenState.LOADING
     }
 
     private fun loadRecipes() {

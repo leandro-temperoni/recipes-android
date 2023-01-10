@@ -2,6 +2,7 @@ package uy.com.temperoni.recipes.repository
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken;
+import kotlinx.coroutines.suspendCancellableCoroutine
 import uy.com.temperoni.recipes.dto.RecipeDto
 import java.io.BufferedReader
 import java.io.IOException
@@ -18,47 +19,54 @@ class RecipesApi @Inject constructor(private val gson: Gson) {
         const val API_URL = "https://2kxenzmhnf.execute-api.us-east-1.amazonaws.com/recipes"
     }
 
-    fun getRecipesList(): List<RecipeDto> {
+    suspend fun getRecipesList(): List<RecipeDto> {
         val userListType: Type = object : TypeToken<ArrayList<RecipeDto?>?>() {}.type
-        return gson.fromJson(getJson(API_URL), userListType)
+        val rawString = getJson(API_URL)
+        return gson.fromJson(rawString, userListType)
     }
 
-    fun getRecipeDetail(id: String): RecipeDto {
-        return gson.fromJson(getJson("${API_URL}/$id"), RecipeDto::class.java)
+    suspend fun getRecipeDetail(id: String): RecipeDto {
+        val rawString = getJson("${API_URL}/$id")
+        return gson.fromJson(rawString, RecipeDto::class.java)
     }
 
-    private fun getJson(urlString: String): String {
-        var connection: HttpURLConnection? = null
-        var reader: BufferedReader? = null
+    private suspend fun getJson(urlString: String): String {
+        return suspendCancellableCoroutine { continuation ->
 
-        try {
-            val url = URL(urlString)
-            connection = url.openConnection() as? HttpURLConnection
-            connection?.connect()
+            var connection: HttpURLConnection? = null
+            var reader: BufferedReader? = null
 
-            val stream: InputStream? = connection?.inputStream
-
-            reader = BufferedReader(InputStreamReader(stream))
-
-            val buffer = StringBuffer()
-            var line = reader.readLine()
-
-            while (line != null) {
-                buffer.append(line+"\n");
-                line = reader.readLine()
-            }
-
-            return buffer.toString();
-
-        } catch (e: Exception) {
-            throw IOException()
-        } finally {
-            connection?.disconnect()
             try {
-                reader?.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
+                val url = URL(urlString)
+                connection = url.openConnection() as? HttpURLConnection
+                connection?.connect()
+
+                val stream: InputStream? = connection?.inputStream
+
+                reader = BufferedReader(InputStreamReader(stream))
+
+                val buffer = StringBuffer()
+                var line = reader.readLine()
+
+                while (line != null) {
+                    buffer.append(line + "\n");
+                    line = reader.readLine()
+                }
+
+                val result = buffer.toString()
+                continuation.resumeWith(Result.success(result))
+
+            } catch (e: Exception) {
+                continuation.resumeWith(Result.failure(e))
+            } finally {
+                connection?.disconnect()
+                try {
+                    reader?.close()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
+
         }
     }
 }
