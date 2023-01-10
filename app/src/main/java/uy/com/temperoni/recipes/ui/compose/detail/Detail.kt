@@ -1,6 +1,5 @@
 package uy.com.temperoni.recipes.ui.compose.detail
 
-import androidx.annotation.IdRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -55,6 +54,8 @@ fun DetailImage(urls: List<String>) {
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(16.dp),
+                pageCount = urls.size,
+                activeColor = MaterialTheme.colors.primary
             )
         }
     }
