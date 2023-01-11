@@ -90,7 +90,7 @@ fun Content(viewModel: RecipesViewModel) {
     val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
     when (recipesBook.state) {
-        SUCCESS_LIST -> List(recipes = recipesBook.desserts)
+        SUCCESS -> List(recipes = recipesBook.desserts)
         ZRP -> GenericMessage(message = "No has cargado contenido aquí")
         ERROR -> GenericMessage(message = "Ocurrió un error al cargar el recetario")
         else -> {

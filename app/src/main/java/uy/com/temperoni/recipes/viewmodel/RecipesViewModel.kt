@@ -45,13 +45,13 @@ class RecipesViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             repository.fetchRecipes()
                 .catch {
-                    recipesBookStateRecipes!!.value = getRecipesBookUseCase.invoke()
+                    recipesBookStateRecipes!!.value = getRecipesBookUseCase()
                 }
                 .map { response ->
                     mapper.mapRecipes(response)
                 }
                 .collect { response ->
-                    recipesBookStateRecipes!!.value = getRecipesBookUseCase.invoke(response)
+                    recipesBookStateRecipes!!.value = getRecipesBookUseCase(response)
                 }
         }
     }

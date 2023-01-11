@@ -1,6 +1,5 @@
 package uy.com.temperoni.recipes.domain
 
-import android.util.Log
 import uy.com.temperoni.recipes.ui.model.Recipe
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState
@@ -18,7 +17,7 @@ class GetRecipesBookUseCase @Inject constructor() {
                 desserts = response
 
                 state = if (desserts.isNotEmpty()){
-                    ScreenState.SUCCESS_LIST
+                    ScreenState.SUCCESS
                 } else {
                     ScreenState.ZRP
                 }

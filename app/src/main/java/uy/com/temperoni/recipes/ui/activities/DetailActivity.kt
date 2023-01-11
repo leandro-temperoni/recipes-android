@@ -111,7 +111,7 @@ fun Content(id: String, viewModel: RecipeDetailViewModel) {
 
     when (recipe.state) {
         LOADING -> Loading()
-        DETAIL -> Detail(recipe.item)
+        SUCCESS -> Detail(recipe.item)
         ERROR -> GenericMessage(message = "Ocurrió un error al cargar la receta")
         else -> {
             // Do nothing

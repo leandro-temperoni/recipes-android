@@ -4,21 +4,17 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.*
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.*
-import uy.com.temperoni.recipes.rule.MainDispatcherRule
+import uy.com.temperoni.recipes.commons.BaseViewModelTest
+import uy.com.temperoni.recipes.commons.mockRecipe
 import uy.com.temperoni.recipes.domain.GetRecipesBookUseCase
 import uy.com.temperoni.recipes.dto.RecipeDto
 import uy.com.temperoni.recipes.mappers.RecipesMapper
 import uy.com.temperoni.recipes.repository.RecipesRepository
-import uy.com.temperoni.recipes.ui.model.Recipe
 
-@ExperimentalCoroutinesApi
-class RecipesViewModelTest {
-
-    @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
+@OptIn(ExperimentalCoroutinesApi::class)
+class RecipesViewModelTest : BaseViewModelTest() {
 
     @Test
     fun givenMockFlow_whenCallingGetRecipes_thenShouldCallFetchRecipesAndReturnResult() = runTest {
@@ -56,14 +52,6 @@ class RecipesViewModelTest {
         // Assert
         verify(repo).fetchRecipes()
         verify(useCase).invoke()
+        assert(!viewModel.isLoading())
     }
-
-    private fun mockRecipe(id: String) = Recipe(
-        id = id,
-        images = listOf(""),
-        introduction = "",
-        name = "name",
-        ingredients = emptyList(),
-        instructions = emptyList()
-    )
 }
