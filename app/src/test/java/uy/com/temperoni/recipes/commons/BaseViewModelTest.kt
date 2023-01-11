@@ -4,7 +4,7 @@ import org.junit.Rule
 import uy.com.temperoni.recipes.rule.MainDispatcherRule
 import uy.com.temperoni.recipes.ui.model.Recipe
 
-open class BaseViewModelTest {
+abstract class BaseViewModelTest {
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
