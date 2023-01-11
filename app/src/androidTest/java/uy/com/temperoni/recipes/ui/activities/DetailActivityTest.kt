@@ -90,7 +90,7 @@ class DetailActivityTest {
     }
 
     private fun mockRecipe() = Recipe(
-        id = 1,
+        id = "1",
         images = listOf(""),
         introduction = "Intro",
         name = "Receta 1",

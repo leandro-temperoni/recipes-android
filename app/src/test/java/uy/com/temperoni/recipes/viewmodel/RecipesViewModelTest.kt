@@ -24,8 +24,8 @@ class RecipesViewModelTest {
     @Test
     fun givenMockFlow_whenCallingGetRecipes_thenShouldCallFetchRecipesAndReturnResult() = testDispatcher.runBlockingTest {
         // Arrange
-        val list = listOf(RecipeDto(1), RecipeDto(2))
-        val mappedList = listOf(mockRecipe(1), mockRecipe(2))
+        val list = listOf(RecipeDto("1"), RecipeDto("2"))
+        val mappedList = listOf(mockRecipe("1"), mockRecipe("2"))
         val mockFlow: Flow<List<RecipeDto>> = flow { emit(list) }
         val repo: RecipesRepository = mock(RecipesRepository::class.java)
         `when`(repo.fetchRecipes()).thenReturn(mockFlow)
@@ -59,7 +59,7 @@ class RecipesViewModelTest {
         verify(useCase).invoke()
     }
 
-    private fun mockRecipe(id: Int) = Recipe(
+    private fun mockRecipe(id: String) = Recipe(
         id = id,
         images = listOf(""),
         introduction = "",

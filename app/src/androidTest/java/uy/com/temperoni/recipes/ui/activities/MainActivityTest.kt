@@ -9,8 +9,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import uy.com.temperoni.recipes.ui.compose.list.List
 import uy.com.temperoni.recipes.ui.model.Recipe
-import uy.com.temperoni.recipes.ui.state.RecipesUiState
-import uy.com.temperoni.recipes.ui.state.ScreenState
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 
 @ExperimentalPagerApi
@@ -23,12 +21,12 @@ class MainActivityTest {
     @Test
     fun givenTwoItems_whenDisplayingList_thenShouldShowTwoTitles() {
         // Arrange
-        val list = listOf(mockRecipe(1, name = "Receta 1"), mockRecipe(2, name = "Receta 2"))
+        val list = listOf(mockRecipe("1", name = "Receta 1"), mockRecipe("2", name = "Receta 2"))
 
         // Act
         composeTestRule.setContent {
             RecetasTheme {
-                List(list, true)
+                List(list)
             }
         }
 
@@ -46,18 +44,17 @@ class MainActivityTest {
         // Act
         composeTestRule.setContent {
             RecetasTheme {
-                List(list, false)
+                List(list)
             }
         }
 
         // Assert
-        composeTestRule.onNodeWithText("Ocurrió un error al cargar el recetario").assertExists()
         composeTestRule.onNodeWithText("Receta 1").assertDoesNotExist()
         composeTestRule.onNodeWithText("Receta 2").assertDoesNotExist()
         composeTestRule.onNodeWithText("Receta 3").assertDoesNotExist()
     }
 
-    private fun mockRecipe(id: Int, name: String) = Recipe(
+    private fun mockRecipe(id: String, name: String) = Recipe(
         id = id,
         images = listOf(""),
         introduction = "",

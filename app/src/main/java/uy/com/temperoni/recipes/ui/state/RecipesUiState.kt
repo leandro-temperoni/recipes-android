@@ -6,7 +6,5 @@ class RecipesUiState {
 
     var desserts: List<Recipe> = listOf()
 
-    var hasDesserts = false
-
     var state: ScreenState = ScreenState.LOADING
 }

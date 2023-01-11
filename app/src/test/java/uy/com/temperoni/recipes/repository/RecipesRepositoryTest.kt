@@ -51,14 +51,14 @@ class RecipesRepositoryTest {
     fun givenAnId_whenCallingFetchRecipe_shouldCallApiToGetRecipeDetailWithThatSameId(): Unit = runBlocking {
         // Arrange
         val id = 3
-        val data = RecipeDto(id)
-        `when`(api.getRecipeDetail(id)).thenReturn(data)
+        val data = RecipeDto("id")
+        `when`(api.getRecipeDetail("id")).thenReturn(data)
 
         // Act
-        val result = repository.fetchRecipe(id).first()
+        val result = repository.fetchRecipe("id").first()
 
         // Assert
-        verify(api).getRecipeDetail(id)
+        verify(api).getRecipeDetail("id")
         assertEquals(data, result)
     }
 }
