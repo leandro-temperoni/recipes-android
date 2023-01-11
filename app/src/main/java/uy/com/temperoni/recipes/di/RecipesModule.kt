@@ -11,6 +11,8 @@ import javax.inject.Singleton
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import uy.com.temperoni.recipes.repository.networking.GsonWrapper
+import uy.com.temperoni.recipes.repository.networking.HttpWrapper
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -26,6 +28,18 @@ class RecipesModule {
     @Provides
     fun providesGson(): Gson {
         return Gson()
+    }
+
+    @Singleton
+    @Provides
+    fun providesGsonWrapper(gson: Gson): GsonWrapper {
+        return GsonWrapper(gson)
+    }
+
+    @Singleton
+    @Provides
+    fun providesHttpWrapper(): HttpWrapper {
+        return HttpWrapper()
     }
 
     @Provides
