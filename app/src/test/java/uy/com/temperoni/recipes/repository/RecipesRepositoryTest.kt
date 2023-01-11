@@ -1,7 +1,9 @@
 package uy.com.temperoni.recipes.repository
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -13,6 +15,7 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import uy.com.temperoni.recipes.dto.RecipeDto
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RecipesRepositoryTest {
 
     @InjectMocks
@@ -34,7 +37,7 @@ class RecipesRepositoryTest {
     }
 
     @Test
-    fun whenCallingFetchRecipes_shouldCallApiToGetRecipesList(): Unit = runBlocking {
+    fun whenCallingFetchRecipes_shouldCallApiToGetRecipesList() = runTest {
         // Arrange
         val data = emptyList<RecipeDto>()
         `when`(api.getRecipesList()).thenReturn(data)
@@ -48,7 +51,7 @@ class RecipesRepositoryTest {
     }
 
     @Test
-    fun givenAnId_whenCallingFetchRecipe_shouldCallApiToGetRecipeDetailWithThatSameId(): Unit = runBlocking {
+    fun givenAnId_whenCallingFetchRecipe_shouldCallApiToGetRecipeDetailWithThatSameId() = runTest {
         // Arrange
         val id = 3
         val data = RecipeDto("id")
