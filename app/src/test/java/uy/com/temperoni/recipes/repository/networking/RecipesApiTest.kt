@@ -11,7 +11,6 @@ import uy.com.temperoni.recipes.commons.BaseMockitoInjectTest
 import uy.com.temperoni.recipes.dto.RecipeDto
 import java.lang.reflect.Type
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class RecipesApiTest : BaseMockitoInjectTest() {
 
     @InjectMocks
@@ -25,7 +24,7 @@ class RecipesApiTest : BaseMockitoInjectTest() {
 
     @Suppress("SENSELESS_COMPARISON")
     @Test
-    fun whenCallingGet_withType_shouldReturnTheExpectedDto() = runTest {
+    fun whenCallingGet_withType_shouldReturnTheExpectedDto() {
         // Arrange
         val dto = listOf(RecipeDto())
         `when`(httpWrapper.getJson("url")).thenReturn("response")
@@ -42,7 +41,7 @@ class RecipesApiTest : BaseMockitoInjectTest() {
 
     @Suppress("SENSELESS_COMPARISON")
     @Test
-    fun whenCallingGet_withClass_shouldReturnTheExpectedDto() = runTest {
+    fun whenCallingGet_withClass_shouldReturnTheExpectedDto() {
         // Arrange
         val dto = RecipeDto()
         `when`(httpWrapper.getJson("url")).thenReturn("response")
@@ -57,7 +56,7 @@ class RecipesApiTest : BaseMockitoInjectTest() {
     }
 
     @Test(expected = Exception::class)
-    fun whenCallingGet_withAnExceptionFromGson_shouldReturnThatException() = runTest {
+    fun whenCallingGet_withAnExceptionFromGson_shouldReturnThatException() {
         // Arrange
         `when`(httpWrapper.getJson("url")).thenReturn("response")
         val type: Type = object : TypeToken<List<RecipeDto>>() {}.type
@@ -71,7 +70,7 @@ class RecipesApiTest : BaseMockitoInjectTest() {
     }
 
     @Test(expected = Exception::class)
-    fun whenCallingGet_withAnExceptionFromHttpWrapper_shouldReturnThatException() = runTest {
+    fun whenCallingGet_withAnExceptionFromHttpWrapper_shouldReturnThatException() {
         // Arrange
         `when`(httpWrapper.getJson("url")).thenThrow(Exception())
 
