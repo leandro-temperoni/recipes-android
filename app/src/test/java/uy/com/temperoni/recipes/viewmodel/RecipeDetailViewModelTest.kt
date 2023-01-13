@@ -21,9 +21,8 @@ class RecipeDetailViewModelTest : BaseViewModelTest() {
         // Arrange
         val recipe = RecipeDto("1")
         val mappedRecipe = mockRecipe("1")
-        val mockFlow: Flow<RecipeDto> = flow { emit(recipe) }
         val repo: RecipesRepository = Mockito.mock(RecipesRepository::class.java)
-        Mockito.`when`(repo.fetchRecipe("1")).thenReturn(mockFlow)
+        Mockito.`when`(repo.fetchRecipe("1")).thenReturn(recipe)
         val mapper: RecipesMapper = Mockito.mock(RecipesMapper::class.java)
         Mockito.`when`(mapper.mapRecipe(recipe)).thenReturn(mappedRecipe)
         val useCase = Mockito.mock(GetRecipeDetailUseCase::class.java)

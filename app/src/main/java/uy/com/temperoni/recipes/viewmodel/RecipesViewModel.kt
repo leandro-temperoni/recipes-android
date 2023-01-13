@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -42,7 +43,7 @@ class RecipesViewModel @Inject constructor(
     }
 
     private fun loadRecipes() {
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch(Dispatchers.Main) {
             repository.fetchRecipes()
                 .catch {
                     recipesBookStateRecipes!!.value = getRecipesBookUseCase()

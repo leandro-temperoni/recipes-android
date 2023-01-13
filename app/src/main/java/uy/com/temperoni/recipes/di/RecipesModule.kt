@@ -44,6 +44,6 @@ class RecipesModule {
 
     @Provides
     fun providesDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Main
+        return Dispatchers.IO
     }
 }

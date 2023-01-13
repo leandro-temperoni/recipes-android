@@ -22,8 +22,7 @@ class RecipesRepository @Inject constructor(private val api: RecipesApi) {
         emit(data)
     }.flowOn(Dispatchers.IO)
 
-    suspend fun fetchRecipe(id: String): Flow<RecipeDto> = flow {
-        val data = api.get("$API_URL/$id", RecipeDto::class.java)
-        emit(data)
-    }.flowOn(Dispatchers.IO)
+    fun fetchRecipe(id: String): RecipeDto {
+        return api.get("$API_URL/$id", RecipeDto::class.java)
+    }
 }

@@ -43,14 +43,14 @@ class RecipesRepositoryTest : BaseMockitoInjectTest() {
     }
 
     @Test
-    fun givenAnId_whenCallingFetchRecipe_shouldCallApiToGetRecipeDetailWithThatSameId() = runTest {
+    fun givenAnId_whenCallingFetchRecipe_shouldCallApiToGetRecipeDetailWithThatSameId() {
         // Arrange
         val id = "1"
         val data = RecipeDto(id)
         `when`(api.get("$API_URL/$id", RecipeDto::class.java)).thenReturn(data)
 
         // Act
-        val result = repository.fetchRecipe(id).first()
+        val result = repository.fetchRecipe(id)
 
         // Assert
         verify(api).get("$API_URL/$id", RecipeDto::class.java)
