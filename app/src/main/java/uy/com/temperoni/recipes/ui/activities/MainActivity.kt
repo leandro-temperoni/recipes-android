@@ -7,6 +7,8 @@ import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -14,6 +16,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -49,23 +53,27 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             RecetasTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
+                Surface {
                     val scaffoldState = rememberScaffoldState()
-                    val scope = rememberCoroutineScope()
                     val navController = rememberNavController()
                     Scaffold(
                         scaffoldState = scaffoldState,
                         topBar = {
                             TopAppBar(
-                                title = { Text("Recetario") }
+                                title = { Text("Recetario") },
+                                backgroundColor = MaterialTheme.colors.surface,
+                                elevation = 0.dp
                             )
                         },
                         bottomBar = {
                             BottomNavBar(navController = navController)
                         }
                     ) { innerPadding ->
-                        NavHost(navController, startDestination = Screen.Desserts.route, Modifier.padding(innerPadding)) {
+                        NavHost(
+                            navController,
+                            startDestination = Screen.Desserts.route,
+                            Modifier.padding(innerPadding)
+                        ) {
                             composable(Screen.Desserts.route) { Content(viewModel) }
                             composable(Screen.Groceries.route) { Groceries() }
                             composable(Screen.Chronometer.route) { Chronometer() }
@@ -81,7 +89,9 @@ class MainActivity : AppCompatActivity() {
 // https://developer.android.com/codelabs/jetpack-compose-navigation
 @ExperimentalPagerApi
 fun goToDetail(context: Context, id: String, title: String) {
-    context.startActivity(Intent(context, DetailActivity::class.java).putExtra("id", id).putExtra("title", title))
+    context.startActivity(
+        Intent(context, DetailActivity::class.java).putExtra("id", id).putExtra("title", title)
+    )
 }
 
 @ExperimentalPagerApi
@@ -89,12 +99,14 @@ fun goToDetail(context: Context, id: String, title: String) {
 fun Content(viewModel: RecipesViewModel) {
     val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
-    when (recipesBook.state) {
-        SUCCESS -> List(recipes = recipesBook.desserts)
-        ZRP -> GenericMessage(message = "No has cargado contenido aquí")
-        ERROR -> GenericMessage(message = "Ocurrió un error al cargar el recetario")
-        else -> {
-            // Do nothing
+    Box(modifier = Modifier.background(MaterialTheme.colors.surface)) {
+        when (recipesBook.state) {
+            SUCCESS -> List(recipes = recipesBook.desserts)
+            ZRP -> GenericMessage(message = "No has cargado contenido aquí")
+            ERROR -> GenericMessage(message = "Ocurrió un error al cargar el recetario")
+            else -> {
+                // Do nothing
+            }
         }
     }
 }

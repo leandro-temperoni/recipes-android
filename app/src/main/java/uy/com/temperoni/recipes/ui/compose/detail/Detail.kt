@@ -19,6 +19,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.PagerState
 import uy.com.temperoni.recipes.R
+import uy.com.temperoni.recipes.ui.model.Ingredient
 import uy.com.temperoni.recipes.ui.model.Recipe
 
 @ExperimentalPagerApi
@@ -82,28 +83,8 @@ fun DetailSummary(name: String, description: String) {
 
 @Composable
 fun DetailTabs(recipe: Recipe) {
-    var state by remember { mutableStateOf(0) }
-    TabRow(selectedTabIndex = state) {
-        DetailsTabs.values().forEachIndexed { index, tab ->
-            Tab(
-                icon = {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = tab.icon),
-                        contentDescription = ""
-                    )
-                },
-                text = { Text(tab.text) },
-                selected = state == index,
-                onClick = { state = index }
-            )
-        }
-    }
-
-    when (state) {
-        0 -> Ingredients(ingredients = recipe.ingredients)
-        1 -> Steps(instructions = recipe.instructions)
-        else -> {}
-    }
+    Section(ingredients = recipe.ingredients)
+    Steps(instructions = recipe.instructions)
 }
 
 @Composable
@@ -114,6 +95,17 @@ fun SubTitle(text: String) {
         modifier = Modifier.padding(8.dp),
         style = MaterialTheme.typography.subtitle1
     )
+}
+
+@Composable
+fun Section(ingredients: List<Ingredient>) {
+    Surface(
+        color = MaterialTheme.colors.onSecondary,
+        shape = MaterialTheme.shapes.medium,
+        modifier = Modifier.padding(8.dp)
+    ) {
+        Ingredients(ingredients)
+    }
 }
 
 private enum class DetailsTabs(val text: String, val icon: Int) {

@@ -1,5 +1,6 @@
 package uy.com.temperoni.recipes.ui.compose.detail
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -42,7 +43,9 @@ fun Ingredient(data: Ingredient) {
 
 @Composable
 fun Ingredients(ingredients: List<Ingredient>) {
-    ingredients.forEach { ingredient ->
-        Ingredient(data = ingredient)
+    Column {
+        ingredients.forEach { ingredient ->
+            Ingredient(data = ingredient)
+        }
     }
 }
