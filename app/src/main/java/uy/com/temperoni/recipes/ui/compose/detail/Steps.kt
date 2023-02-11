@@ -3,8 +3,8 @@ package uy.com.temperoni.recipes.ui.compose.detail
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,20 +26,20 @@ fun Step(text: String, index: Int) {
                 .width(32.dp)
                 .height(32.dp)
                 .clip(CircleShape)
-                .background(color = MaterialTheme.colors.secondary),
+                .background(color = MaterialTheme.colorScheme.secondary),
             contentAlignment = Alignment.Center
         ) {
             Text(
-                color = MaterialTheme.colors.primaryVariant,
+                color = MaterialTheme.colorScheme.secondary,
                 text = "${index + 1}",
-                style = MaterialTheme.typography.subtitle2,
+                style = MaterialTheme.typography.titleSmall,
             )
         }
         Text(
-            color = MaterialTheme.colors.onSurface,
+            color = MaterialTheme.colorScheme.onSurface,
             text = text,
             modifier = Modifier.padding(12.dp, 0.dp, 0.dp, 0.dp),
-            style = MaterialTheme.typography.body1
+            style = MaterialTheme.typography.bodyLarge
         )
     }
 }

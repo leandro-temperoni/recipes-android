@@ -3,39 +3,35 @@ package uy.com.temperoni.recipes.ui.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
-import uy.com.temperoni.recipes.ui.compose.commons.Chronometer
+import uy.com.temperoni.recipes.ui.compose.chrono.Chronometer
 import uy.com.temperoni.recipes.ui.compose.commons.GenericMessage
 import uy.com.temperoni.recipes.ui.compose.groceries.Groceries
 import uy.com.temperoni.recipes.ui.compose.list.List
 import uy.com.temperoni.recipes.ui.compose.navigation.BottomNavBar
 import uy.com.temperoni.recipes.ui.compose.navigation.Screen
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
-import uy.com.temperoni.recipes.ui.state.ScreenState
 import uy.com.temperoni.recipes.ui.state.ScreenState.*
 import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -54,15 +50,13 @@ class MainActivity : AppCompatActivity() {
         setContent {
             RecetasTheme {
                 Surface {
-                    val scaffoldState = rememberScaffoldState()
                     val navController = rememberNavController()
+                    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
                     Scaffold(
-                        scaffoldState = scaffoldState,
                         topBar = {
                             TopAppBar(
-                                title = { Text("Recetario") },
-                                backgroundColor = MaterialTheme.colors.surface,
-                                elevation = 0.dp
+                                scrollBehavior = scrollBehavior,
+                                title = { Text("Recetario") }
                             )
                         },
                         bottomBar = {
@@ -99,7 +93,7 @@ fun goToDetail(context: Context, id: String, title: String) {
 fun Content(viewModel: RecipesViewModel) {
     val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
-    Box(modifier = Modifier.background(MaterialTheme.colors.surface)) {
+    Box(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
         when (recipesBook.state) {
             SUCCESS -> List(recipes = recipesBook.desserts)
             ZRP -> GenericMessage(message = "No has cargado contenido aquí")

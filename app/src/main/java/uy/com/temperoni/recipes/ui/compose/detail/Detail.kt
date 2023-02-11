@@ -2,13 +2,13 @@ package uy.com.temperoni.recipes.ui.compose.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
@@ -56,7 +56,7 @@ fun DetailImage(urls: List<String>) {
                     .align(Alignment.Center)
                     .padding(16.dp),
                 pageCount = urls.size,
-                activeColor = MaterialTheme.colors.primary
+                activeColor = MaterialTheme.colorScheme.primary
             )
         }
     }
@@ -65,7 +65,7 @@ fun DetailImage(urls: List<String>) {
 @Composable
 fun DetailSummary(name: String, description: String) {
     Text(
-        color = MaterialTheme.colors.onSurface,
+        color = MaterialTheme.colorScheme.onSurface,
         text = name,
         modifier = Modifier.padding(8.dp),
         fontSize = 32.sp
@@ -74,10 +74,10 @@ fun DetailSummary(name: String, description: String) {
     SubTitle("DESCRIPCION")
 
     Text(
-        color = MaterialTheme.colors.onSurface,
+        color = MaterialTheme.colorScheme.onSurface,
         text = description,
         modifier = Modifier.padding(8.dp),
-        style = MaterialTheme.typography.body1
+        style = MaterialTheme.typography.bodyLarge
     )
 }
 
@@ -90,17 +90,17 @@ fun DetailTabs(recipe: Recipe) {
 @Composable
 fun SubTitle(text: String) {
     Text(
-        color = MaterialTheme.colors.primary,
+        color = MaterialTheme.colorScheme.primary,
         text = text.toUpperCase(Locale.current),
         modifier = Modifier.padding(8.dp),
-        style = MaterialTheme.typography.subtitle1
+        style = MaterialTheme.typography.titleMedium
     )
 }
 
 @Composable
 fun Section(ingredients: List<Ingredient>) {
     Surface(
-        color = MaterialTheme.colors.onSecondary,
+        color = MaterialTheme.colorScheme.onSecondary,
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier.padding(8.dp)
     ) {

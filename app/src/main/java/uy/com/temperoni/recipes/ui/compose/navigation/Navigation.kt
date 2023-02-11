@@ -1,22 +1,18 @@
 package uy.com.temperoni.recipes.ui.compose.navigation
 
-import androidx.compose.foundation.background
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import uy.com.temperoni.recipes.R
 
 @Composable
 fun BottomNavBar(navController: NavHostController) {
@@ -25,11 +21,11 @@ fun BottomNavBar(navController: NavHostController) {
         Screen.Groceries,
         Screen.Chronometer
     )
-    BottomNavigation(backgroundColor = Color.Transparent, contentColor = Color.Transparent) {
+    NavigationBar(containerColor = Color.Transparent, contentColor = Color.Transparent) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         items.forEach { screen ->
-            BottomNavigationItem(
+            NavigationBarItem(
                 icon = { Icon(ImageVector.vectorResource(screen.icon), contentDescription = null) },
                 label = { Text(screen.route) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
@@ -47,9 +43,7 @@ fun BottomNavBar(navController: NavHostController) {
                         // Restore state when reselecting a previously selected item
                         restoreState = true
                     }
-                },
-                selectedContentColor = MaterialTheme.colors.primary,
-                unselectedContentColor = Color.DarkGray
+                }
             )
         }
     }
