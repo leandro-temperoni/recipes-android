@@ -5,8 +5,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardElevation
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import uy.com.temperoni.recipes.ui.activities.goToDetail
-import uy.com.temperoni.recipes.ui.compose.commons.GenericMessage
 import uy.com.temperoni.recipes.ui.model.Recipe
 import uy.com.temperoni.recipes.ui.theme.Shapes
 
@@ -39,7 +39,7 @@ fun List(recipes: List<Recipe>) {
 fun RecipeRow(recipe: Recipe) {
     val context = LocalContext.current
     Card(
-        elevation = 8.dp, modifier = Modifier
+        modifier = Modifier
             .height(300.dp)
             .padding(0.dp, 6.dp)
             .clickable { goToDetail(context, recipe.id, recipe.name) }, shape = Shapes.medium

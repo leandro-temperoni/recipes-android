@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -33,6 +33,7 @@ import uy.com.temperoni.recipes.ui.theme.RecetasTheme
 import uy.com.temperoni.recipes.viewmodel.RecipeDetailViewModel
 import kotlin.math.roundToInt
 
+@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalPagerApi
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
@@ -52,7 +53,7 @@ class DetailActivity : AppCompatActivity() {
                     CustomNestedScrollConnection(toolbarHeightPx, toolbarOffsetHeightPx)
                 }
 
-                Surface(color = MaterialTheme.colors.background) {
+                Surface(color = MaterialTheme.colorScheme.background) {
                     Box(
                         Modifier
                             .fillMaxSize()
