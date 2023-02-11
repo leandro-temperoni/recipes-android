@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import uy.com.temperoni.recipes.dto.InstructionDto
 import uy.com.temperoni.recipes.ui.model.Instruction
 
 
@@ -26,11 +25,11 @@ fun Step(text: String, index: Int) {
                 .width(32.dp)
                 .height(32.dp)
                 .clip(CircleShape)
-                .background(color = MaterialTheme.colorScheme.secondary),
+                .background(color = MaterialTheme.colorScheme.secondaryContainer),
             contentAlignment = Alignment.Center
         ) {
             Text(
-                color = MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
                 text = "${index + 1}",
                 style = MaterialTheme.typography.titleSmall,
             )

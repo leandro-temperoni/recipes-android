@@ -18,9 +18,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.PagerState
-import uy.com.temperoni.recipes.R
 import uy.com.temperoni.recipes.ui.model.Ingredient
-import uy.com.temperoni.recipes.ui.model.Recipe
 
 @ExperimentalPagerApi
 @Composable
@@ -82,12 +80,6 @@ fun DetailSummary(name: String, description: String) {
 }
 
 @Composable
-fun DetailTabs(recipe: Recipe) {
-    Section(ingredients = recipe.ingredients)
-    Steps(instructions = recipe.instructions)
-}
-
-@Composable
 fun SubTitle(text: String) {
     Text(
         color = MaterialTheme.colorScheme.primary,
@@ -98,17 +90,16 @@ fun SubTitle(text: String) {
 }
 
 @Composable
-fun Section(ingredients: List<Ingredient>) {
+fun Ingredients(ingredients: List<Ingredient>) {
     Surface(
-        color = MaterialTheme.colorScheme.onSecondary,
+        color = MaterialTheme.colorScheme.tertiaryContainer,
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier.padding(8.dp)
     ) {
-        Ingredients(ingredients)
+        Column {
+            ingredients.forEach { ingredient ->
+                Ingredient(data = ingredient)
+            }
+        }
     }
-}
-
-private enum class DetailsTabs(val text: String, val icon: Int) {
-    Ingredients("INGREDIENTES", R.drawable.ic_baseline_kitchen_24),
-    Steps("PASOS", R.drawable.ic_baseline_format_list_numbered_24)
 }

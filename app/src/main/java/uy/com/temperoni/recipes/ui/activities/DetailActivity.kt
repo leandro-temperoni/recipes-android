@@ -23,9 +23,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import uy.com.temperoni.recipes.ui.compose.commons.GenericMessage
 import uy.com.temperoni.recipes.ui.compose.commons.Loading
-import uy.com.temperoni.recipes.ui.compose.detail.DetailImage
-import uy.com.temperoni.recipes.ui.compose.detail.DetailSummary
-import uy.com.temperoni.recipes.ui.compose.detail.DetailTabs
+import uy.com.temperoni.recipes.ui.compose.detail.*
 import uy.com.temperoni.recipes.ui.model.Recipe
 import uy.com.temperoni.recipes.ui.state.RecipeDetailUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState.*
@@ -133,6 +131,8 @@ fun Detail(recipe: Recipe) {
 
         DetailSummary(name = recipe.name, recipe.introduction)
 
-        DetailTabs(recipe)
+        Ingredients(ingredients = recipe.ingredients)
+
+        Steps(instructions = recipe.instructions)
     }
 }

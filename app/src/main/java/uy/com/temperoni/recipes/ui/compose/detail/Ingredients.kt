@@ -1,6 +1,5 @@
 package uy.com.temperoni.recipes.ui.compose.detail
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,7 +21,7 @@ fun Ingredient(data: Ingredient) {
             .padding(12.dp), verticalAlignment = Alignment.Top
     ) {
         Text(
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.onTertiaryContainer,
             text = data.name,
             modifier = Modifier.weight(.6f),
             style = MaterialTheme.typography.bodyLarge,
@@ -30,7 +29,7 @@ fun Ingredient(data: Ingredient) {
             overflow = TextOverflow.Ellipsis
         )
         Text(
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.onTertiaryContainer,
             text = data.amount,
             modifier = Modifier.weight(.4f),
             textAlign = TextAlign.End,
@@ -38,14 +37,5 @@ fun Ingredient(data: Ingredient) {
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
-    }
-}
-
-@Composable
-fun Ingredients(ingredients: List<Ingredient>) {
-    Column {
-        ingredients.forEach { ingredient ->
-            Ingredient(data = ingredient)
-        }
     }
 }
