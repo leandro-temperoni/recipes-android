@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                             Modifier.padding(innerPadding)
                         ) {
                             composable(Screen.Desserts.route) { Content(viewModel) }
-                            composable(Screen.Groceries.route) { Groceries() }
+                            composable(Screen.Groceries.route) { Groceries(viewModel) }
                             composable(Screen.Chronometer.route) { Chronometer() }
                         }
                     }
@@ -93,7 +93,7 @@ fun goToDetail(context: Context, id: String, title: String) {
 fun Content(viewModel: RecipesViewModel) {
     val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
-    Box(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+    Box {
         when (recipesBook.state) {
             SUCCESS -> List(recipes = recipesBook.desserts)
             ZRP -> GenericMessage(message = "No has cargado contenido aquí")

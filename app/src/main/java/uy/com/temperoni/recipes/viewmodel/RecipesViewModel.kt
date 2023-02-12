@@ -3,15 +3,13 @@ package uy.com.temperoni.recipes.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import uy.com.temperoni.recipes.domain.GetRecipesBookUseCase
 import uy.com.temperoni.recipes.mappers.RecipesMapper
 import uy.com.temperoni.recipes.repository.RecipesRepository
+import uy.com.temperoni.recipes.ui.model.Grocery
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState
 import javax.inject.Inject
@@ -20,11 +18,13 @@ import javax.inject.Inject
 class RecipesViewModel @Inject constructor(
     private val repository: RecipesRepository,
     private val mapper: RecipesMapper,
-    private val dispatcher: CoroutineDispatcher,
     private val getRecipesBookUseCase: GetRecipesBookUseCase
 ) : ViewModel() {
 
     private var recipesBookStateRecipes: MutableStateFlow<RecipesUiState>? = null
+
+    private var groceries: MutableStateFlow<List<Grocery>> = MutableStateFlow(listOf(Grocery("Manteca"), Grocery("Azucar"), Grocery("Leche"), Grocery("Cacao")))
+    private val _groceries: StateFlow<List<Grocery>> = groceries.asStateFlow()
 
     init {
         getRecipes()
@@ -55,5 +55,13 @@ class RecipesViewModel @Inject constructor(
                     recipesBookStateRecipes!!.value = getRecipesBookUseCase(response)
                 }
         }
+    }
+
+    fun getGroceries(): StateFlow<List<Grocery>> {
+        return _groceries
+    }
+
+    fun updateGrocery(grocery: Grocery, isChecked: Boolean) {
+        grocery.checked.value = isChecked
     }
 }
