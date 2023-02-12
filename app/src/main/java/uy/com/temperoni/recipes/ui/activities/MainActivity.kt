@@ -75,8 +75,15 @@ class MainActivity : AppCompatActivity() {
                                             item,
                                             newValue
                                         )
+                                    },
+                                    onDelete = { item -> viewModel.removeGrocery(item) },
+                                    onSave = { item, newValue ->
+                                        viewModel.saveGrocery(item, newValue)
+                                    },
+                                    onAdd = {
+                                        viewModel.addGrocery()
                                     }
-                                ) { item -> viewModel.removeGrocery(item) }
+                                )
                             }
                             composable(Screen.Chronometer.route) { Chronometer() }
                         }

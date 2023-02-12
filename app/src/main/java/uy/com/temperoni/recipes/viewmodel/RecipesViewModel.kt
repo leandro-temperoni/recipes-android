@@ -4,7 +4,6 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -25,7 +24,7 @@ class RecipesViewModel @Inject constructor(
 
     private var recipesBookStateRecipes: MutableStateFlow<RecipesUiState>? = null
 
-    private val _groceries = getMockGroceries().toMutableStateList()
+    private val _groceries = mutableListOf<Grocery>().toMutableStateList()
     val groceries: List<Grocery>
         get() = _groceries
 
@@ -60,14 +59,19 @@ class RecipesViewModel @Inject constructor(
         }
     }
 
-    private fun getMockGroceries(): MutableList<Grocery> {
-        return mutableListOf(Grocery("1", "Manteca"), Grocery("2", "Azucar"), Grocery("3", "Leche"), Grocery("4", "Cacao"))
-    }
-
     fun updateGrocery(grocery: Grocery, isChecked: Boolean) {
         grocery.checked.value = isChecked
     }
     fun removeGrocery(grocery: Grocery) {
         _groceries.remove(grocery)
+    }
+
+    fun saveGrocery(grocery: Grocery, newValue: String) {
+        grocery.name = newValue
+    }
+
+    fun addGrocery() {
+        val id = groceries.lastOrNull()?.id?.toInt()?.plus(1) ?: 1
+        _groceries.add(Grocery(id.toString(), ""))
     }
 }
