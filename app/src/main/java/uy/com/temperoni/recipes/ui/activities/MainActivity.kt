@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
@@ -69,7 +68,16 @@ class MainActivity : AppCompatActivity() {
                             Modifier.padding(innerPadding)
                         ) {
                             composable(Screen.Desserts.route) { Content(viewModel) }
-                            composable(Screen.Groceries.route) { Groceries(viewModel) }
+                            composable(Screen.Groceries.route) {
+                                Groceries(viewModel.groceries,
+                                    onCheck = { item, newValue ->
+                                        viewModel.updateGrocery(
+                                            item,
+                                            newValue
+                                        )
+                                    }
+                                ) { item -> viewModel.removeGrocery(item) }
+                            }
                             composable(Screen.Chronometer.route) { Chronometer() }
                         }
                     }

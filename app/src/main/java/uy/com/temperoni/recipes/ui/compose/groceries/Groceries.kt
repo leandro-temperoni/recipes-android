@@ -4,33 +4,40 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import uy.com.temperoni.recipes.ui.model.Grocery
-import uy.com.temperoni.recipes.viewmodel.RecipesViewModel
 
 @Composable
-fun Groceries(viewModel: RecipesViewModel) {
-    val data = viewModel.getGroceries().collectAsState()
+fun Groceries(
+    groceries: List<Grocery>,
+    onCheck: (Grocery, Boolean) -> Unit,
+    onDelete: (Grocery) -> Unit
+) {
     LazyColumn(
         Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(data.value) { item ->
-            GroceryItem(item) { grocery, newValue -> viewModel.updateGrocery(grocery, newValue) }
+        items(items = groceries, key = { item -> item.id }) { item ->
+            GroceryItem(item,
+                onCheck = { newValue -> onCheck(item, newValue) },
+                onDelete = { onDelete(item) })
         }
     }
 }
 
 @Composable
-fun GroceryItem(grocery: Grocery, onCheck: (Grocery, Boolean) -> Unit) {
+fun GroceryItem(
+    grocery: Grocery,
+    onCheck: (Boolean) -> Unit,
+    onDelete: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -42,12 +49,18 @@ fun GroceryItem(grocery: Grocery, onCheck: (Grocery, Boolean) -> Unit) {
     ) {
         Checkbox(
             checked = grocery.checked.value,
-            onCheckedChange = { newValue -> onCheck(grocery, newValue) })
+            onCheckedChange = onCheck
+        )
         Text(
             text = grocery.name,
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(8.dp, 32.dp),
+            modifier = Modifier
+                .weight(1f)
+                .padding(8.dp, 32.dp),
             textDecoration = if (grocery.checked.value) TextDecoration.LineThrough else TextDecoration.None
         )
+        IconButton(onClick = onDelete) {
+            Icon(Icons.Filled.Close, contentDescription = null)
+        }
     }
 }
