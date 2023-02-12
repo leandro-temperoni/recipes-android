@@ -26,7 +26,7 @@ class MainActivityTest {
         // Act
         composeTestRule.setContent {
             RecetasTheme {
-                List(list)
+                List(list) { viewModel.asd() }
             }
         }
 
@@ -44,7 +44,7 @@ class MainActivityTest {
         // Act
         composeTestRule.setContent {
             RecetasTheme {
-                List(list)
+                List(list) { viewModel.asd() }
             }
         }
 

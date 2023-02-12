@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
@@ -69,7 +68,23 @@ class MainActivity : AppCompatActivity() {
                             Modifier.padding(innerPadding)
                         ) {
                             composable(Screen.Desserts.route) { Content(viewModel) }
-                            composable(Screen.Groceries.route) { Groceries() }
+                            composable(Screen.Groceries.route) {
+                                Groceries(viewModel.groceries,
+                                    onCheck = { item, newValue ->
+                                        viewModel.updateGrocery(
+                                            item,
+                                            newValue
+                                        )
+                                    },
+                                    onDelete = { item -> viewModel.removeGrocery(item) },
+                                    onSave = { item, newValue ->
+                                        viewModel.saveGrocery(item, newValue)
+                                    },
+                                    onAdd = {
+                                        viewModel.addGrocery()
+                                    }
+                                )
+                            }
                             composable(Screen.Chronometer.route) { Chronometer() }
                         }
                     }
@@ -93,7 +108,7 @@ fun goToDetail(context: Context, id: String, title: String) {
 fun Content(viewModel: RecipesViewModel) {
     val recipesBook: RecipesUiState by viewModel.getRecipes().collectAsState()
 
-    Box(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+    Box {
         when (recipesBook.state) {
             SUCCESS -> List(recipes = recipesBook.desserts)
             ZRP -> GenericMessage(message = "No has cargado contenido aquí")

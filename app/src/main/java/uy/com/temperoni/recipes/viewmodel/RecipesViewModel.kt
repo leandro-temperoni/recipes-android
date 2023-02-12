@@ -1,17 +1,16 @@
 package uy.com.temperoni.recipes.viewmodel
 
+import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import uy.com.temperoni.recipes.domain.GetRecipesBookUseCase
 import uy.com.temperoni.recipes.mappers.RecipesMapper
 import uy.com.temperoni.recipes.repository.RecipesRepository
+import uy.com.temperoni.recipes.ui.model.Grocery
 import uy.com.temperoni.recipes.ui.state.RecipesUiState
 import uy.com.temperoni.recipes.ui.state.ScreenState
 import javax.inject.Inject
@@ -20,11 +19,14 @@ import javax.inject.Inject
 class RecipesViewModel @Inject constructor(
     private val repository: RecipesRepository,
     private val mapper: RecipesMapper,
-    private val dispatcher: CoroutineDispatcher,
     private val getRecipesBookUseCase: GetRecipesBookUseCase
 ) : ViewModel() {
 
     private var recipesBookStateRecipes: MutableStateFlow<RecipesUiState>? = null
+
+    private val _groceries = mutableListOf<Grocery>().toMutableStateList()
+    val groceries: List<Grocery>
+        get() = _groceries
 
     init {
         getRecipes()
@@ -55,5 +57,21 @@ class RecipesViewModel @Inject constructor(
                     recipesBookStateRecipes!!.value = getRecipesBookUseCase(response)
                 }
         }
+    }
+
+    fun updateGrocery(grocery: Grocery, isChecked: Boolean) {
+        grocery.checked.value = isChecked
+    }
+    fun removeGrocery(grocery: Grocery) {
+        _groceries.remove(grocery)
+    }
+
+    fun saveGrocery(grocery: Grocery, newValue: String) {
+        grocery.name = newValue
+    }
+
+    fun addGrocery() {
+        val id = groceries.lastOrNull()?.id?.toInt()?.plus(1) ?: 1
+        _groceries.add(Grocery(id.toString(), ""))
     }
 }
