@@ -66,7 +66,7 @@ fun DetailSummary(name: String, description: String) {
         color = MaterialTheme.colorScheme.onSurface,
         text = name,
         modifier = Modifier.padding(8.dp),
-        fontSize = 32.sp
+        style = MaterialTheme.typography.headlineLarge
     )
 
     SubTitle("DESCRIPCION")

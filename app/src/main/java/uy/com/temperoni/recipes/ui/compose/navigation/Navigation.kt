@@ -21,7 +21,7 @@ fun BottomNavBar(navController: NavHostController) {
         Screen.Groceries,
         Screen.Chronometer
     )
-    NavigationBar(containerColor = Color.Transparent, contentColor = Color.Transparent) {
+    NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         items.forEach { screen ->

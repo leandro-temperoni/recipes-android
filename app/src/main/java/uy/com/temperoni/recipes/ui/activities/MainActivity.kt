@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
                     Scaffold(
                         topBar = {
-                            TopAppBar(
+                            CenterAlignedTopAppBar(
                                 scrollBehavior = scrollBehavior,
                                 title = { Text("Recetario") }
                             )
