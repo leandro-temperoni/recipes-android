@@ -1,7 +1,11 @@
 package uy.com.temperoni.recipes.ui.compose.detail
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -12,22 +16,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.PagerState
 import uy.com.temperoni.recipes.ui.model.Ingredient
 
-@ExperimentalPagerApi
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DetailImage(urls: List<String>) {
     val pagerState = remember {
         PagerState()
     }
     Box(modifier = Modifier.fillMaxWidth(1f)) {
-        HorizontalPager(count = urls.size, state = pagerState) { index ->
+        HorizontalPager(pageCount = urls.size, state = pagerState) { index ->
             Box(modifier = Modifier.fillMaxSize()) {
                 Image(
                     painter = rememberImagePainter(

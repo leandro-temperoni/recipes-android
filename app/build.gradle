@@ -65,6 +65,7 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.1"
     debugImplementation "androidx.compose.ui:ui-tooling:1.4.1"
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.1")
+    implementation 'androidx.compose.foundation:foundation:1.4.1'
 
     // Networking
     implementation("io.coil-kt:coil-compose:1.4.0")
@@ -89,8 +90,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     // Accompanist
-    implementation "com.google.accompanist:accompanist-pager:0.28.0"
-    implementation "com.google.accompanist:accompanist-pager-indicators:0.28.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.30.1"
 
     // Splash Screen API
     implementation("androidx.core:core-splashscreen:1.0.0")
