@@ -2,6 +2,9 @@ package uy.com.temperoni.recipes.di
 
 import android.content.Context
 import android.content.res.Resources
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,8 +14,10 @@ import javax.inject.Singleton
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import uy.com.temperoni.recipes.repository.datastore.recipesDataStore
 import uy.com.temperoni.recipes.repository.networking.GsonWrapper
 import uy.com.temperoni.recipes.repository.networking.HttpWrapper
+import kotlin.properties.ReadOnlyProperty
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -45,5 +50,11 @@ class RecipesModule {
     @Provides
     fun providesDispatcher(): CoroutineDispatcher {
         return Dispatchers.IO
+    }
+
+    @Singleton
+    @Provides
+    fun providesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+        return context.recipesDataStore
     }
 }

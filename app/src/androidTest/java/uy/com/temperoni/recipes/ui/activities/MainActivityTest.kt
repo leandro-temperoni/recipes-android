@@ -2,6 +2,7 @@ package uy.com.temperoni.recipes.ui.activities
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.accompanist.pager.ExperimentalPagerApi
 import org.junit.Rule
@@ -26,7 +27,7 @@ class MainActivityTest {
         // Act
         composeTestRule.setContent {
             RecetasTheme {
-                List(list) { viewModel.asd() }
+                List(recipes = list)
             }
         }
 
@@ -44,7 +45,7 @@ class MainActivityTest {
         // Act
         composeTestRule.setContent {
             RecetasTheme {
-                List(list) { viewModel.asd() }
+                List(list)
             }
         }
 

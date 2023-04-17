@@ -27,7 +27,7 @@ class RecipesViewModelTest : BaseViewModelTest() {
         val mapper: RecipesMapper = mock(RecipesMapper::class.java)
         `when`(mapper.mapRecipes(list)).thenReturn(mappedList)
         val useCase = mock(GetRecipesBookUseCase::class.java)
-        val viewModel = RecipesViewModel(repo, mapper, mainDispatcherRule.testDispatcher, useCase)
+        val viewModel = RecipesViewModel(repo, mapper, useCase)
 
         // Act
         viewModel.getRecipes()
@@ -44,7 +44,7 @@ class RecipesViewModelTest : BaseViewModelTest() {
         `when`(repo.fetchRecipes()).thenThrow(Exception())
         val mapper: RecipesMapper = mock(RecipesMapper::class.java)
         val useCase = mock(GetRecipesBookUseCase::class.java)
-        val viewModel = RecipesViewModel(repo, mapper, mainDispatcherRule.testDispatcher, useCase)
+        val viewModel = RecipesViewModel(repo, mapper, useCase)
 
         // Act
         viewModel.getRecipes()
